@@ -59,7 +59,7 @@ List<StudentBean> students = null;
 				<td><%=sb.getStdaddress() %></td>
 				<td>
 					<a href="./modify.jsp?stdno=<%=sb.getStdno()%>">수정</a>
-					<a href="./delete.jsp?stdno=<%=sb.getStdno()%>">삭제</a>
+					<a href="./delete.jsp?stdno=<%=sb.getStdno()%>" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
 				</td>
 			</tr>
 			<%} %>
