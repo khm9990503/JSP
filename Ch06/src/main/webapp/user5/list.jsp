@@ -5,12 +5,11 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="config.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 List<User5Bean> users = null;
 	try{
-		Connection conn = DBCP.getConnection("java1db");
+		Connection conn = DBCP.getConnection("dbcp_java1db");
 		
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM `user5`");
@@ -71,8 +70,8 @@ List<User5Bean> users = null;
 				<td><%= ub.getAddr() %></td>
 				<td><%= ub.getHp() %></td>
 				<td>
-					<a href="./modify.jsp?uid=<%= ub.getUid() %>">수정</a>	
-					<a href="#">삭제</a>	
+					<a href="./modify.jsp?uid=<%=ub.getUid()%>">수정</a>	
+					<a href="./delete.jsp?uid=<%=ub.getUid()%>">삭제</a>	
 				</td>
 			</tr>
 			<% } %>

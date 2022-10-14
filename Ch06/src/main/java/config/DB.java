@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class DB {
 	
 	private static DB instance = new DB();
@@ -24,4 +29,5 @@ public class DB {
 		// 2단계
 		return DriverManager.getConnection(host,user,pass);
 	}
+	
 }
