@@ -15,17 +15,18 @@
 	try{
 		Connection conn = DBCP.getConnection("dbcp_java1db");
 		
-		String sql = "UPDATE `user5` SET `name`=?, `birth`=?, `gender`=?, `age`=?, `addr`=?, `hp`=? WHERE `uid`=?";
+		String sql = "UPDATE `user5` SET `uid`=?, `birth`=?, `gender`=?, `age`=?, `addr`=?, `hp`=? ";
+			   sql += "WHERE `name`=?";
 		       
 		       
 		PreparedStatement psmt = conn.prepareStatement(sql);
-		psmt.setString(1, name);
+		psmt.setString(1, uid);
 		psmt.setString(2, birth);
 		psmt.setString(3, gender);
 		psmt.setString(4, age);
 		psmt.setString(5, addr);
 		psmt.setString(6, hp);
-		psmt.setString(7, uid);
+		psmt.setString(7, name);
 		
 		psmt.executeUpdate();
 		

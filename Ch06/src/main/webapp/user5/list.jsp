@@ -70,8 +70,8 @@ List<User5Bean> users = null;
 				<td><%= ub.getAddr() %></td>
 				<td><%= ub.getHp() %></td>
 				<td>
-					<a href="./modify.jsp?uid=<%=ub.getUid()%>">수정</a>	
-					<a href="./delete.jsp?uid=<%=ub.getUid()%>">삭제</a>	
+					<a href="./modify.jsp?name=<%=ub.getName()%>">수정</a>	
+					<a href="./delete.jsp?name=<%=ub.getName()%>">삭제</a>	
 				</td>
 			</tr>
 			<% } %>

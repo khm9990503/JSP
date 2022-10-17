@@ -6,14 +6,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String uid = request.getParameter("uid");
+	String name = request.getParameter("name");
 	User5Bean ub = null;
 	
 	try{
 		Connection conn = DBCP.getConnection("dbcp_java1db");
-		String sql = "select * from `user5` where `uid`=?";
+		String sql = "select * from `user5` where `name`=?";
 		PreparedStatement psmt = conn.prepareStatement(sql);
-		psmt.setString(1, uid);
+		psmt.setString(1, name);
 		
 		ResultSet rs = psmt.executeQuery();
 		
@@ -52,7 +52,7 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" name="uid" value="<%= ub.getUid() %>" readonly/></td>
+					<td><input type="text" name="uid" value="<%= ub.getUid() %>"/></td>
 				</tr>
 				<tr>
 					<td>이름</td>

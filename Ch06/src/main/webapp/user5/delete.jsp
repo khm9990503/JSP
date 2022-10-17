@@ -7,13 +7,13 @@
 <%
 		//전송 데이터 수신
 		request.setCharacterEncoding("UTF-8");
-		String uid	 = request.getParameter("uid");
+		String name	 = request.getParameter("name");
 		
 		
 		try{
 			Connection conn = DBCP.getConnection("dbcp_java1db");
 			Statement stmt = conn.createStatement();
-			String sql = "DELETE FROM `user5` WHERE `uid`='"+uid+"'";
+			String sql = "DELETE FROM `user5` WHERE `name`='"+name+"'";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			conn.close();
