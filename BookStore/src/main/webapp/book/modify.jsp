@@ -36,7 +36,7 @@
 	<body>
 		<h3>도서수정</h3>
 		
-		<a href="./index.jsp">처음으로</a>
+		<a href="../index.jsp">처음으로</a>
 		<a href="./list.jsp">목록으로</a>
 		
 		<form action="./modifyProc.jsp" method="post">

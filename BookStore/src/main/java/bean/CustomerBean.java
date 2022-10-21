@@ -1,16 +1,16 @@
 package bean;
 
 public class CustomerBean {
-	private int cudid;
+	private int cusid;
 	private String name;
 	private String address;
 	private String phone;
 	
-	public int getCudid() {
-		return cudid;
+	public int getCusid() {
+		return cusid;
 	}
-	public void setCudid(int cudid) {
-		this.cudid = cudid;
+	public void setCusid(int cusid) {
+		this.cusid = cusid;
 	}
 	public String getName() {
 		return name;
