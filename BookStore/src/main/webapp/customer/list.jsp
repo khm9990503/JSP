@@ -1,7 +1,7 @@
+<%@page import="config.DBCP"%>
 <%@page import="bean.CustomerBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="config.JDBC"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -10,7 +10,7 @@
 <%
 	List<CustomerBean> customers = null;
 	try{
-		Connection conn = JDBC.getInstance().getConnection();
+		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
 		String sql = "select * from `customer`";
 		ResultSet rs = stmt.executeQuery(sql);

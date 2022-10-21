@@ -1,4 +1,4 @@
-<%@page import="config.JDBC"%>
+<%@page import="config.DBCP"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
@@ -15,7 +15,7 @@
 	
 	try{
 		
-		Connection conn = JDBC.getInstance().getConnection();
+		Connection conn = DBCP.getConnection();
 		// 3단계
 		String sql = "INSERT INTO `book` VALUES (?,?,?,?)";
 		PreparedStatement psmt = conn.prepareStatement(sql);

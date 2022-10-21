@@ -1,4 +1,4 @@
-<%@page import="config.JDBC"%>
+<%@page import="config.DBCP"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -14,7 +14,7 @@
 			
 			try{
 				
-				Connection conn = JDBC.getInstance().getConnection();
+				Connection conn = DBCP.getConnection();
 				// 3단계
 				String sql = "UPDATE `customer` SET `name`=?, `address`=?, `phone`=? ";
 			   		   sql+= "WHERE `cusid`=?";

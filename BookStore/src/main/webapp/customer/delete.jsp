@@ -1,4 +1,4 @@
-<%@page import="config.JDBC"%>
+<%@page import="config.DBCP"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -11,7 +11,7 @@
 		
 		
 		try{
-			Connection conn = JDBC.getInstance().getConnection();
+			Connection conn = DBCP.getConnection();
 			Statement stmt = conn.createStatement();
 			String sql = "DELETE FROM `customer` WHERE `cusid`='"+cusid+"'";
 			stmt.executeUpdate(sql);

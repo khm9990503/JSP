@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user::register</title>
+		<title>도서등록</title>
 	</head>
 	<body>
 		<h3>도서등록</h3>

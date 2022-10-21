@@ -1,7 +1,7 @@
+<%@page import="config.DBCP"%>
 <%@page import="bean.CustomerBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="config.JDBC"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="bean.BookBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
@@ -10,7 +10,7 @@
 	String cusid = request.getParameter("cusid");
 	CustomerBean customer = null;
 	try{
-		Connection conn = JDBC.getInstance().getConnection();
+		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
 		String sql = "select * from `customer` where `cusid`='"+cusid+"'";
 		ResultSet rs = stmt.executeQuery(sql);

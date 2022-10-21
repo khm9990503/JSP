@@ -1,6 +1,6 @@
+<%@page import="config.DBCP"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="config.JDBC"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.BookBean"%>
@@ -9,9 +9,9 @@
 <%
 	List<BookBean> books = null;
 	try{
-		Connection conn = JDBC.getInstance().getConnection();
+		Connection conn = DBCP.getConnection();
 		Statement stmt = conn.createStatement();
-		String sql = "select * from `book`";
+		String sql = "SELECT * FROM `book`";
 		ResultSet rs = stmt.executeQuery(sql);
 		books = new ArrayList<>();
 		while(rs.next()){
