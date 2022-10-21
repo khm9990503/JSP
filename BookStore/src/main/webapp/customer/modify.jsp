@@ -56,7 +56,7 @@
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td> <input type="number" name="phone" value="<%=customer.getPhone() %>"> </td>
+					<td> <input type="text" name="phone" value="<%=customer.getPhone() %>"> </td>
 				</tr>
 				<tr>
 					<td colspan="2" align="right"> <input type="submit" value="수정"> </td>

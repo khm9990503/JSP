@@ -9,7 +9,7 @@
 		int cusid	 = Integer.parseInt(request.getParameter("cusid")) ;
 		String name	 = request.getParameter("name");
 		String address	 = request.getParameter("address");
-		int phone		 = Integer.parseInt(request.getParameter("phone"));
+		String phone		 = request.getParameter("phone");
 			
 			
 			try{
@@ -21,7 +21,7 @@
 				PreparedStatement psmt = conn.prepareStatement(sql);
 				psmt.setString(1,name);
 				psmt.setString(2,address);
-				psmt.setInt(3,phone);
+				psmt.setString(3,phone);
 				psmt.setInt(4,cusid);
 				
 				// 4단계

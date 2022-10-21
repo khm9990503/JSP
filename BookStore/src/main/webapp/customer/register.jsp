@@ -27,7 +27,7 @@
 				</tr>
 				<tr>
 					<td>휴대폰</td>
-					<td> <input type="number" name="phone" placeholder="휴대폰 입력"/> </td>
+					<td> <input type="text" name="phone" placeholder="휴대폰 입력"/> </td>
 				</tr>
 				<tr>
 					<td colspan="2" align="right">

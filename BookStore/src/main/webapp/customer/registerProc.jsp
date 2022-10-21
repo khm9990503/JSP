@@ -8,8 +8,8 @@
 	request.setCharacterEncoding("UTF-8");
 	int cusid	 = Integer.parseInt(request.getParameter("cusid")) ;
 	String name	 = request.getParameter("name");
-	String address	 = request.getParameter("address");
-	int phone		 = Integer.parseInt(request.getParameter("phone"));
+	String address	= request.getParameter("address");
+	String phone	= request.getParameter("phone");
 	
 	
 	
@@ -22,7 +22,7 @@
 		psmt.setInt(1,cusid);
 		psmt.setString(2,name);
 		psmt.setString(3,address);
-		psmt.setInt(4,phone);
+		psmt.setString(4,phone);
 		
 		// 4단계
 		psmt.executeUpdate();
