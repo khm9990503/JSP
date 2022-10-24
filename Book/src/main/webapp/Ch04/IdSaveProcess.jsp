@@ -2,6 +2,7 @@
 <%@page import="utils.CookieManager"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String user_id = request.getParameter("user_id");
 	String user_pw = request.getParameter("user_pw");
 	String save_check = request.getParameter("save_check");
@@ -22,13 +23,3 @@
 		JSFunction.alertBack("로그인에 실패", out);
 	}
 %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
-		
-	</body>
-</html>
