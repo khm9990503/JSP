@@ -27,4 +27,8 @@
   	<error-code>500</error-code>
   	<location>/Ch02/Exception.jsp</location>
   </error-page>
+  
+  <session-config>
+  	<session-timeout>20</session-timeout>
+  </session-config>
 </web-app>
