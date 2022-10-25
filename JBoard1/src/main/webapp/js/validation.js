@@ -29,6 +29,7 @@
 		});
 		
 		$('#btnUidCheck').click(function(){
+			
 			let uid = $('input[name=uid]').val();
 			// 반복되는 체크로 서버 공격 막기
 			if(isUidOk){

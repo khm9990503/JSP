@@ -1,5 +1,6 @@
+<%@page import="kr.co.jboard1.db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="config.DBCP"%>
+<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -18,8 +19,8 @@
 	
 	try{
 	Connection conn = DBCP.getConnection();
-	String sql = "INSERT INTO `board_user` SET `uid`=?, `pass`=SHA2(?,256), `name`=?, `nick`=?, `email`=?, `hp`=?, `rdate`=NOW(), `regip`=?, `zip`=?, `addr1`=?, `addr2`=?";
-	PreparedStatement psmt = conn.prepareStatement(sql);
+	
+	PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_USER);
 	psmt.setString(1, uid);
 	psmt.setString(2, pass);
 	psmt.setString(3, name);

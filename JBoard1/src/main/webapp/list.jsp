@@ -20,42 +20,6 @@
                         <td>20-05-12</td>
                         <td>12</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><a href="./view.jsp">테스트 제목입니다.</a>
-                            &nbsp;[3]
-                        </td>
-                        <td>길동이</td>
-                        <td>20-05-12</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><a href="./view.jsp">테스트 제목입니다.</a>
-                            &nbsp;[3]
-                        </td>
-                        <td>길동이</td>
-                        <td>20-05-12</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><a href="./view.jsp">테스트 제목입니다.</a>
-                            &nbsp;[3]
-                        </td>
-                        <td>길동이</td>
-                        <td>20-05-12</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><a href="./view.jsp">테스트 제목입니다.</a>
-                            &nbsp;[3]
-                        </td>
-                        <td>길동이</td>
-                        <td>20-05-12</td>
-                        <td>12</td>
-                    </tr>
                 </table>
             </section>
             <div class="page">
