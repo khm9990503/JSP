@@ -3,11 +3,12 @@
         <main id="board" class="write">
             <h3>글쓰기</h3>
             <section>
-                <form action="#">
+                <form action="/JBoard1/proc/writeProc.jsp" method="post" enctype="multipart/form-data">
+                	<input type="hidden" name="uid" value="<%=sessUser.getUid()%>"/>
                     <table>
                         <tr>
                             <th>제목</th>
-                            <td><input type="text" name="title" placeholder="제목을 입력하세요."></td>
+                            <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
                         </tr>
                         <tr>
                             <th>내용</th>
@@ -16,9 +17,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>첨부</th>
+                            <th>파일</th>
                             <td>
-                                <input type="file" name="file">
+                                <input type="file" name="fname"/>
                             </td>
                         </tr>
                     </table>
