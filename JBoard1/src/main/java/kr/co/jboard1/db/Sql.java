@@ -39,5 +39,14 @@ public class Sql {
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
 												+ "order by `no` desc "
 												+ "limit ?,10";
-												
+	public static final String SELECT_ARTICLE = "SELECT a.*, b.`fno`, b.`oriName`, b.`download` "
+												+ "FROM `board_article` AS a "
+												+ "left JOIN `board_file` AS b "
+												+ "ON a.`no`=b.`parent` "
+												+ "WHERE `no`=?";
+	
+	public static final String SELECT_FILE = "select * from `board_file` where `fno`=?";
+	
+	public static final String UPDATE_ARTICLE_HIT = "update `board_article` set `hit` = `hit` + 1 where `no`=?";
+	public static final String UPDATE_FILE_DOWNLOAD = "update `board_file` set `download`=`download`+1 where `fno`=?";
 }
