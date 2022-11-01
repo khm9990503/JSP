@@ -21,6 +21,7 @@
 	FileBean fb = dao.selectFile(fno);
 	// 파일 다운로드 카운트 +1
 	dao.updateFileDownload(fno);
+	
 	// 파일 다운로드 헤더정보 수정
 	response.setContentType("application/octet-stream");
 	response.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fb.getOriName(), "utf-8"));

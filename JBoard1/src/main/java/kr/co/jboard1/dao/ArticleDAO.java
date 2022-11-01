@@ -20,12 +20,101 @@ public class ArticleDAO {
 	private ArticleDAO() {}
 	
 	// 기본 CRUD
-	public void insertArticle() {}
+	public int insertArticle(ArticleBean article) {
+		int parent = 0;
+		try{
+			Connection conn = DBCP.getConnection();
+			conn.setAutoCommit(false); // 트렌젝션 시작
+			
+			Statement stmt = conn.createStatement();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			
+			psmt.setString(1, article.getTitle());
+			psmt.setString(2, article.getContent());
+			psmt.setInt(3, article.getFname() == null ? 0 : 1);
+			psmt.setString(4, article.getUid());
+			psmt.setString(5, article.getRegip());
+			
+			psmt.executeUpdate(); // insert
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_NO); // select
+			
+			conn.commit();			// 트렌젝션 끝 All or Nothing
+			
+			if(rs.next()){
+				parent = rs.getInt(1);
+			}
+			rs.close();
+			stmt.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return parent;
+	}
+	
+	public void insertFile(int parent, String newName, String fname) {
+		try{
+			Connection conn = DBCP.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, parent);
+			psmt.setString(2, newName);
+			psmt.setString(3, fname);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public ArticleBean insertComment(ArticleBean comment) {
+		ArticleBean article = null;
+		try{
+			Connection conn = DBCP.getConnection();
+			conn.setAutoCommit(false); // 트렌젝션 시작
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
+			Statement stmt = conn.createStatement();
+			
+			psmt.setInt(1, comment.getParent());
+			psmt.setString(2, comment.getContent());
+			psmt.setString(3, comment.getUid());
+			psmt.setString(4, comment.getRegip());
+			
+			psmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
+			
+			conn.commit();			// 트렌젝션 끝 All or Nothing
+			
+			if(rs.next()) {
+				article = new ArticleBean();
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setContent(rs.getString(6));
+				article.setRdate(rs.getString(11).substring(2,10));
+				article.setNick(rs.getString(12));
+			}
+			
+			rs.close();
+			stmt.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return article;
+	}
+	
 	public ArticleBean selectArticle(String no) {
 		ArticleBean AB= null;
 		
 		try{
 			Connection conn = DBCP.getConnection();
+			
 			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLE);
 			psmt.setString(1, no);
 			ResultSet rs = psmt.executeQuery();
@@ -110,6 +199,40 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return fb;
+	}
+	
+	public List<ArticleBean> selectComments(String parent) {
+		List<ArticleBean> comments = new ArrayList<>();
+		try {
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
+			psmt.setString(1, parent);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleBean comment = new ArticleBean();
+				comment.setNo(rs.getInt(1));
+				comment.setParent(rs.getInt(2));
+				comment.setComment(rs.getInt(3));
+				comment.setCate(rs.getString(4));
+				comment.setTitle(rs.getString(5));
+				comment.setContent(rs.getString(6));
+				comment.setFile(rs.getInt(7));
+				comment.setHit(rs.getInt(8));
+				comment.setUid(rs.getString(9));
+				comment.setRegip(rs.getString(10));
+				comment.setRdate(rs.getString(11).substring(2,10));
+				comment.setNick(rs.getString(12));
+				
+				comments.add(comment);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return comments;
 	}
 	
 	public void updateArticle() {}

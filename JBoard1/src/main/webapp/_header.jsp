@@ -14,6 +14,7 @@
     <meta charset="UTF-8">
     <title>글목록</title>
     <link rel="stylesheet" href="/JBoard1/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -24,3 +25,4 @@
 	            <a href="/JBoard1/user/proc/logout.jsp" class="logout">[로그아웃]</a>
             </p>
         </header>
+        

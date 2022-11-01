@@ -19,6 +19,8 @@ public class ArticleBean {
 	private String oriName;
 	private int download;
 	
+	private String fname;
+	
 	public int getNo() {
 		return no;
 	}
@@ -30,6 +32,9 @@ public class ArticleBean {
 	}
 	public void setParent(int parent) {
 		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
 	}
 	public int getComment() {
 		return comment;
@@ -115,5 +120,13 @@ public class ArticleBean {
 	
 	public void setDownload(int download) {
 		this.download = download;
+	}
+	
+	public String getFname() {
+		return fname;
+	}
+	
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 }
