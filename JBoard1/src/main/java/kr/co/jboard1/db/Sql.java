@@ -62,4 +62,10 @@ public class Sql {
 	
 	public static final String UPDATE_ARTICLE_HIT = "update `board_article` set `hit` = `hit` + 1 where `no`=?";
 	public static final String UPDATE_FILE_DOWNLOAD = "update `board_file` set `download`=`download`+1 where `fno`=?";
+	
+	public static final String UPDATE_COMMENT = "UPDATE `board_article` SET `content`=?, `rdate`=NOW() WHERE `no`=?";
+	public static final String UPDATE_COMMENT_COUNT_PLS = "UPDATE `board_article` SET `comment`=`comment`+1 WHERE `no`=?";
+	public static final String UPDATE_COMMENT_COUNT_MNS = "UPDATE `board_article` SET `comment`=`comment`-1 WHERE `no`=?";
+	
+	public static final String DELETE_COMMENT = "DELETE FROM `board_article` WHERE `no`=?";
 }

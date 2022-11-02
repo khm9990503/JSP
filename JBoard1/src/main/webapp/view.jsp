@@ -26,6 +26,84 @@
 <%@ include file="./_header.jsp" %>
 <script>
 	$(document).ready(function() {
+		
+		// 댓글 삭제하기
+		$(document).on('click','.delete',function(e){
+			e.preventDefault();
+			
+			let article = $(this).closest('article');
+			let result = confirm('정말 삭제 하시겠습니까?');
+			
+			if(result){
+				let no = $(this).attr('data-no');
+				let parent = $(this).attr('data-parent');
+				
+				let jsonData = {
+						"no":no,
+						"parent":parent
+				};
+				
+				$.ajax({
+					url:'/JBoard1/proc/commentDeleteProc.jsp',
+					type:'GET',
+					data:jsonData,
+					dataType:'json',
+					success:function(data){
+						
+						if(data.result > 0){
+							alert('댓글 삭제 완료!');
+							article.hide();
+							
+						}
+					}
+				});
+			}
+		});
+		
+		// 댓글 수정하기
+		$(document).on('click','.modify',function(e){
+			e.preventDefault();
+			
+			let txt = $(this).text();
+			let p = $(this).parent().prev();
+			if(txt=="수정"){
+				// 수정모드
+				$(this).text('수정완료');
+				p.attr('contentEditable',true);
+				p.focus();
+			}else{
+				// 수정완료
+				$(this).text('수정');
+				p.attr('contentEditable',false);
+				
+				let no = $(this).attr('data-no');
+				let content = p.text();
+				
+				let jsonData = {
+						"content":content,
+						"no":no
+				};
+				
+				$.ajax({
+					url:'/JBoard1/proc/commentModifyProc.jsp',
+					type:'POST',
+					data:jsonData,
+					dataType:'json',
+					success:function(data){
+						
+						if(data.result > 0){
+							alert('댓글 수정 완료!');
+						}
+						
+					}
+				});
+			}
+			
+			
+		});
+		
+		// 댓글 쓰기
+		
 		$('.commentForm > form').submit(function() {
 			
 			let pg = $(this).children('input[name=pg]').val();
@@ -52,18 +130,18 @@
 					console.log(data);
 					
 					let article = "<article class='comment'>";
-						article += "<span class='nick'>"+data.nick+"</span>";
+						article += "<span class='nick'>"+data.nick+"</span>&nbsp;";
 						article += "<span class='date'>"+data.date+"</span>";
-						article += "<textarea class='content' readonly>"+data.content+"</textarea>";
+						article += "<p class='comment'>"+data.content+"</p>";
 						article += "<div>";
-						article += "<a href='#' class='delete'>삭제</a>";
-						article += "<a href='#' class='modify'>수정</a>";
+						article += "<a href='#' class='delete' data-no='"+data.no+"'>삭제</a>&nbsp;";
+						article += "<a href='#' class='modify' data-no='"+data.no+"'>수정</a>";
 						article += "</div>";
 						article += "</article>";
 					
 					$('.commentList > .empty').hide();
 					$('.commentList').append(article);
-					$('textare[name=content]').val('');
+					$('textarea[name=content]').val('');
 				}
 			});
 			
@@ -111,10 +189,10 @@
                 <article class="comment">
                     <span class="nick"><%=comment.getNick() %></span>
                     <span class="date"><%=comment.getRdate() %></span>
-                    <textarea name="comment" readonly><%=comment.getContent() %></textarea>
+                    <p class="comment"><%=comment.getContent() %></p>
                     <div>
-                        <a href="#" class="delete">삭제</a>
-                        <a href="#" class="modify">수정</a>
+                        <a href="#" class="delete" data-no="<%=comment.getNo() %>" data-parent="<%=comment.getParent() %>">삭제</a>
+                        <a href="#" class="modify" data-no="<%=comment.getNo() %>">수정</a>
                     </div>
                 </article>
                 <%} %>

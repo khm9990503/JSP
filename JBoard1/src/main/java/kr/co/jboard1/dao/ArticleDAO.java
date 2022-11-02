@@ -78,6 +78,7 @@ public class ArticleDAO {
 			conn.setAutoCommit(false); // 트렌젝션 시작
 			
 			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_COMMENT);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.UPDATE_COMMENT_COUNT_PLS);
 			Statement stmt = conn.createStatement();
 			
 			psmt.setInt(1, comment.getParent());
@@ -85,7 +86,10 @@ public class ArticleDAO {
 			psmt.setString(3, comment.getUid());
 			psmt.setString(4, comment.getRegip());
 			
+			psmt2.setInt(1, comment.getParent());
+			
 			psmt.executeUpdate();
+			psmt2.executeUpdate();
 			ResultSet rs = stmt.executeQuery(Sql.SELECT_COMMENT_LATEST);
 			
 			conn.commit();			// 트렌젝션 끝 All or Nothing
@@ -102,6 +106,7 @@ public class ArticleDAO {
 			rs.close();
 			stmt.close();
 			psmt.close();
+			psmt2.close();
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -237,7 +242,30 @@ public class ArticleDAO {
 	
 	public void updateArticle() {}
 	public void deleteArticle() {}
-	
+	public int deleteComment(String no, String parent) {
+		int result = 0;
+		try{
+			Connection conn = DBCP.getConnection();
+			conn.setAutoCommit(false); // 트렌젝션 시작
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.UPDATE_COMMENT_COUNT_MNS);
+			psmt.setString(1, no);
+			psmt2.setString(1, parent);
+		
+			result = psmt.executeUpdate();
+			psmt2.executeUpdate();
+			
+			conn.commit(); // 트렉젝션 끝
+			
+			psmt.close();
+			psmt2.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 	// 전체 게시물 카운트
 	public int selectCountTotal() {
 		int total = 0;
@@ -284,5 +312,21 @@ public class ArticleDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public int updateComment(String no, String content) {
+		int result = 0;
+		try{
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			psmt.setString(1, content);
+			psmt.setString(2, no);
+			result = psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
