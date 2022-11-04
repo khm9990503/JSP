@@ -53,6 +53,7 @@ public class Sql {
 												+ "WHERE `no`=?";
 	
 	public static final String SELECT_FILE = "select * from `board_file` where `fno`=?";
+	public static final String SELECT_FILE_WITH_PARENT= "select * from `board_file` where `parent`=?";
 	public static final String SELECT_COMMENTS = "select a.*,b.nick from `board_article` as a "
 												+ "join `board_user` as b using (`uid`) "
 												+ "where `parent`=? order by `no` asc";
@@ -60,6 +61,7 @@ public class Sql {
 														+ "JOIN `board_user` AS b USING(`uid`) "
 														+ "WHERE `parent`!=0 ORDER BY `no` DESC LIMIT 1";
 	
+	public static final String UPDATE_ARTICLE = "update `board_article` set `title`=?,`content`=?,`rdate`=now() where `no`=?";
 	public static final String UPDATE_ARTICLE_HIT = "update `board_article` set `hit` = `hit` + 1 where `no`=?";
 	public static final String UPDATE_FILE_DOWNLOAD = "update `board_file` set `download`=`download`+1 where `fno`=?";
 	
@@ -68,4 +70,6 @@ public class Sql {
 	public static final String UPDATE_COMMENT_COUNT_MNS = "UPDATE `board_article` SET `comment`=`comment`-1 WHERE `no`=?";
 	
 	public static final String DELETE_COMMENT = "DELETE FROM `board_article` WHERE `no`=?";
+	public static final String DELETE_ARTICLE = "DELETE FROM `board_article` WHERE `no`=? or `parent`=?";
+	public static final String DELETE_FILE = "DELETE FROM `board_file` WHERE `parent`=?";
 }

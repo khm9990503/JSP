@@ -9,7 +9,7 @@
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8");
 	String no = request.getParameter("no");
 	String pg = request.getParameter("pg");
 	
@@ -167,8 +167,6 @@
                             </td>
                         </tr>
                         <%} %>
-                        
-                        
                         <tr>
                             <th>내용</th>
                             <td>
@@ -177,8 +175,10 @@
                         </tr>
                     </table>
                     <div>
-                        <a href="#" class="btn btnDelete">삭제</a>
-                        <a href="/JBoard1/modify.jsp" class="btn btnModify">수정</a>
+                    	<% if(sessUser.getUid().equals(AB.getUid())){ %>
+                        <a href="/JBoard1/proc/deleteProc.jsp?no=<%= AB.getNo() %>&pg=<%=pg %>" class="btn btnDelete">삭제</a>
+                        <a href="/JBoard1/modify.jsp?no=<%=AB.getNo() %>&pg=<%=pg %>" class="btn btnModify">수정</a>
+                        <% } %>
                         <a href="/JBoard1/list.jsp?pg=<%=pg %>" class="btn btnList">목록</a>
                     </div>
                 </form>
@@ -191,8 +191,10 @@
                     <span class="date"><%=comment.getRdate() %></span>
                     <p class="comment"><%=comment.getContent() %></p>
                     <div>
+                    	<% if(sessUser.getUid().equals(comment.getUid())){ %>
                         <a href="#" class="delete" data-no="<%=comment.getNo() %>" data-parent="<%=comment.getParent() %>">삭제</a>
                         <a href="#" class="modify" data-no="<%=comment.getNo() %>">수정</a>
+                        <% } %>
                     </div>
                 </article>
                 <%} %>
