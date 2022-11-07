@@ -142,6 +142,7 @@
 					$('.commentList > .empty').hide();
 					$('.commentList').append(article);
 					$('textarea[name=content]').val('');
+					
 				}
 			});
 			
@@ -169,8 +170,8 @@
                         <%} %>
                         <tr>
                             <th>내용</th>
-                            <td>
-                                <textarea name="content" readonly><%=AB.getContent()%></textarea>
+                            <td >
+                                <div name="content"><%=AB.getContent()%></div>
                             </td>
                         </tr>
                     </table>
