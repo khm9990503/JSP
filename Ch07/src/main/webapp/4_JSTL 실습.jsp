@@ -53,7 +53,6 @@
 			for(String person : people){
 				out.print("<span>"+person+"</span><br>");
 			}
-			
 			int sum = 0;
 			for(int k=1;k<=10;k++){
 				sum += k;

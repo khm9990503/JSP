@@ -10,7 +10,7 @@
 	String pg = request.getParameter("pg");
 	String no = request.getParameter("no");
 	String title = request.getParameter("title");
-	String content = request.getParameter("content");
+	String content = request.getParameter("ir1");
 	
 	ArticleDAO dao = ArticleDAO.getInstance();
 	int result = dao.updateArticle(title, content, no);

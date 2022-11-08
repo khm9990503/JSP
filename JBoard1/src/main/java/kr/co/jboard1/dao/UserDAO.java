@@ -3,6 +3,9 @@ package kr.co.jboard1.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,4 +94,72 @@ public class UserDAO {
 	public void updateUser() {}
 	public void deleteUser() {}
 	
+	public List<String> selectTerms() {
+		logger.info("selectTerms start...");
+		List<String> tm = new ArrayList<>();
+		String terms = null;
+		String privacy = null;
+		try{
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_TERMS);
+			
+			if(rs.next()){
+				terms = rs.getString(1);
+				privacy = rs.getString(2);
+				
+				tm.add(terms);
+				tm.add(privacy);
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+		return tm;
+	}
+	
+	public int selectCountUid (String uid) {
+		int result = 0;
+		try{
+			Connection conn = DBCP.getConnection();
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
+			psmt.setString(1, uid);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int selectCountNick (String nick) {
+		int result = 0;
+		try{
+			Connection conn = DBCP.getConnection();
+			
+			
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
+			psmt.setString(1, nick);
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

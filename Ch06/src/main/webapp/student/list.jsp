@@ -1,6 +1,6 @@
+<%@page import="bean.StudentBean"%>
 <%@page import="config.DB"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="bean.StudentBean"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>

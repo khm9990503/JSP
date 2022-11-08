@@ -175,7 +175,7 @@
                             </td>
                         </tr>
                     </table>
-                    <div>
+                    <div class="send">
                     	<% if(sessUser.getUid().equals(AB.getUid())){ %>
                         <a href="/JBoard1/proc/deleteProc.jsp?no=<%= AB.getNo() %>&pg=<%=pg %>" class="btn btnDelete">삭제</a>
                         <a href="/JBoard1/modify.jsp?no=<%=AB.getNo() %>&pg=<%=pg %>" class="btn btnModify">수정</a>
