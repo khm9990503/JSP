@@ -51,7 +51,7 @@
 					$('#reg').hide();
 				});
 				
-				// 강좌등록 버튼
+				// 학생등록 버튼
 				$('.btnAdd').click(function() {
 					
 					let stdno 		= $("input[name=stdno]").val();

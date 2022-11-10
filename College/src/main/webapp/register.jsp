@@ -49,6 +49,8 @@
 				// 수강현황 목록
 				$('.btnSearch').click(function() {
 					
+					$('.list').show();
+					
 					let regstdno = $("input[name=regstdno]").val();
 					
 					let jsonData = {
@@ -87,6 +89,7 @@
 					let stdno 		= $("input[name=stdno]").val();
 					let stdname		= $("input[name=stdname]").val();
 					let lec	 		= $("select[name=lec]").val();
+					let lecname		= $("option[value="+lec+"]").text();
 					
 					
 					let jsonData = {
@@ -97,7 +100,7 @@
 					console.log('jsonData : '+jsonData);
 					
 					$.ajax({
-						url:'./proc/lectureRegist.jsp',
+						url:'./proc/registerProc.jsp',
 						type:'POST',
 						data:jsonData,
 						dataType:'json',
@@ -106,10 +109,10 @@
 								alert('수강등록완료!');
 								
 		                            let tags = "<tr>";
-		                            	tags += "<td>"+rb.regstdno+"</td>";
-		                            	tags += "<td>"+rb.stdname+"</td>";
-		                            	tags += "<td>"+rb.lecname+"</td>";
-		                            	tags += "<td>"+rb.reglecno+"</td>";
+		                            	tags += "<td>"+stdno+"</td>";
+		                            	tags += "<td>"+stdname+"</td>";
+		                            	tags += "<td>"+lecname+"</td>";
+		                            	tags += "<td>"+lec+"</td>";
 		                            	tags += "<td></td>";
 		                            	tags += "<td></td>";
 		                            	tags += "<td></td>";
@@ -137,7 +140,7 @@
 		<input type="text" name="regstdno">
 		<button class="btnSearch">검색</button>
 		<button class="btnRE">수강신청</button>
-		<table class="list" border="1">
+		<table class="list" border="1" style="display:none">
 			<tr>
 				<th>학번</th>
 				<th>이름</th>
