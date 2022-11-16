@@ -1,13 +1,9 @@
-<%@page import="kr.co.jboard1.dao.UserDAO"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="kr.co.Farmstory1.dao.TermsDao"%>
 <%@page import="java.util.List"%>
-<%@page import="kr.co.jboard1.db.Sql"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <script>
 	$(function() {
 		
@@ -26,14 +22,14 @@
 	});
 </script>
 <%
-	List<String> tm = UserDAO.getInstance().selectTerms();
+	List<String> ts = TermsDao.getInstance().selectTerms();
 %>
         <main id="user" class="terms">
             <table border="0">
                 <caption>사이트 이용약관</caption>
                 <tr>
                     <td>
-                        <textarea class="terms" readonly><%=tm.get(0) %></textarea>
+                        <textarea class="terms" readonly><%=ts.get(0) %></textarea>
                         <label><input type="checkbox" class="terms">&nbsp;동의합니다.</label>
                     </td>
                 </tr>
@@ -42,14 +38,14 @@
                 <caption>개인정보 취급방침</caption>
                 <tr>
                     <td>
-                        <textarea class="privacy"><%=tm.get(1) %></textarea>
+                        <textarea class="privacy"><%=ts.get(1) %></textarea>
                         <label><input type="checkbox" class="privacy">&nbsp;동의합니다.</label>
                     </td>
                 </tr>
             </table>
             <p>
-                <a href="/JBoard1/user/login.jsp" class="cancel">취소</a>
-                <a href="/JBoard1/user/register.jsp" class="next">다음</a>
+                <a href="./login.jsp" class="cancel">취소</a>
+                <a href="./register.jsp" class="next">다음</a>
             </p>
         </main>
-        <%@ include file="./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>

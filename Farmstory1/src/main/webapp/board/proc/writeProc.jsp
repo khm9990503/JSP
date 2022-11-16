@@ -1,5 +1,5 @@
-<%@page import="kr.co.jboard1.bean.ArticleBean"%>
-<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
+<%@page import="kr.co.Farmstory1.dao.ArticleDAO"%>
+<%@page import="kr.co.Farmstory1.bean.ArticleBean"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.io.File"%>
@@ -7,10 +7,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="kr.co.jboard1.db.Sql"%>
-<%@page import="kr.co.jboard1.bean.UserBean"%>
 <%@page import="java.sql.PreparedStatement"%>
-<%@page import="kr.co.jboard1.db.DBCP"%>
 <%@page import="java.sql.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -21,7 +18,8 @@
 	int maxSize = 1024 * 1024 * 10; // 최대 파일 업로드 허용치 10mb
 	MultipartRequest mr = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 	
-	
+	String group	 = mr.getParameter("group");
+	String cate		 = mr.getParameter("cate");
 	String title	 = mr.getParameter("title");
 	String content	 = mr.getParameter("ir1");
 	String uid		 = mr.getParameter("uid");
@@ -29,7 +27,7 @@
 	String regip	 = request.getRemoteAddr();
 	
 	ArticleBean article = new ArticleBean();
-	
+	article.setCate(cate);
 	article.setTitle(title);
 	article.setContent(content);
 	article.setUid(uid);
@@ -62,5 +60,5 @@
 		dao.insertFile(parent, newName, fname);
 	}
 	
-	response.sendRedirect("../list.jsp");
+	response.sendRedirect("../list.jsp?group="+group+"&cate="+cate);
 %>
