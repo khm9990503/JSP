@@ -166,14 +166,15 @@ public class ArticleDAO {
 		return AB;
 	}
 	
-	public List<ArticleBean> selectArticles(int start) {
+	public List<ArticleBean> selectArticles(int start,String cate) {
 		logger.info("selectArticles start...");
 		List<ArticleBean> articles = new ArrayList<>();
 		try{
 			Connection conn = DBCP.getConnection();
 			
 			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
-			psmt.setInt(1, start);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
 			ResultSet rs = psmt.executeQuery();
 			
 			while(rs.next()){
@@ -357,18 +358,19 @@ public class ArticleDAO {
 		return result;
 	}
 	// 전체 게시물 카운트
-	public int selectCountTotal() {
+	public int selectCountTotal(String cate) {
 		logger.info("selectCountTotal start...");
 		int total = 0;
 		try {
 			Connection conn = DBCP.getConnection();
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(Sql.SELECT_COUNT_TOTAL);
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
+			ResultSet rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
 			}
 			rs.close();
-			stmt.close();
+			psmt.close();
 			conn.close();
 		}catch(Exception e) {
 			e.printStackTrace();

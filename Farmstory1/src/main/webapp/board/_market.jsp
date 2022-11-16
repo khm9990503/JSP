@@ -11,7 +11,7 @@
             <img src="../img/sub_aside_cate2_tit.png" alt="소개">
             <ul class="lnb">
                 <li class="on">
-                    <a href="/Farmstory1/board/list.jsp"></a>
+                    <a href="/Farmstory1/board/list.jsp?group=market&cate=market"></a>
                 </li>
             </ul>
         </aside>

@@ -9,9 +9,11 @@
 	String no = request.getParameter("no");
 	String title = request.getParameter("title");
 	String content = request.getParameter("ir1");
+	String group = request.getParameter("group");
+	String cate = request.getParameter("cate");
 	
 	ArticleDAO dao = ArticleDAO.getInstance();
 	int result = dao.updateArticle(title, content, no);
 	
-	response.sendRedirect("../view.jsp?no="+no+"&pg="+pg);
+	response.sendRedirect("../view.jsp?no="+no+"&pg="+pg+"&group="+group+"&cate="+cate);
 %>

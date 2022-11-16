@@ -5,6 +5,8 @@
 	request.setCharacterEncoding("utf-8");
 	String no = request.getParameter("no");
 	String pg = request.getParameter("pg");
+	String group = request.getParameter("group");
+	String cate = request.getParameter("cate");
 	
 	ArticleDAO dao = ArticleDAO.getInstance();
 	
@@ -17,7 +19,7 @@
 	//실제 파일 삭제(디렉토리)
 	if(fileName != null){
 		
-		String path = application.getRealPath("/file");
+		String path = application.getRealPath("/board/file");
 		
 		File file = new File(path, fileName);
 		
@@ -27,6 +29,6 @@
 		
 	}
 	
-	response.sendRedirect("../list.jsp?pg="+pg);
+	response.sendRedirect("../list.jsp?pg="+pg+"&group="+group+"&cate="+cate);
 	
 %>

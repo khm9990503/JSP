@@ -11,7 +11,7 @@
             <img src="../img/sub_aside_cate4_tit.png" alt="소개">
             <ul class="lnb">
                 <li class="on">
-                    <a href="/Farmstory1/board/list.jsp"></a>
+                    <a href="/Farmstory1/board/list.jsp?group=event&cate=event"></a>
                 </li>
             </ul>
         </aside>

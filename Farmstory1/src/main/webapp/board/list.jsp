@@ -34,7 +34,7 @@
 	ArticleDAO dao = ArticleDAO.getInstance();
 	
 	//전체 게시물 갯수
-	total = dao.selectCountTotal();
+	total = dao.selectCountTotal(cate);
 	
 	//마지막 페이지 번호
 	if(total % 10 == 0){
@@ -48,9 +48,19 @@
 	
 	pageStartNum = total - start;
 	
-	List<ArticleBean> articles = dao.selectArticles(start);
+	List<ArticleBean> articles = dao.selectArticles(start, cate);
 %>
-
+<script type="text/javascript">
+	$(function() {
+		//비회원 글쓰기버튼 클릭이벤트
+	    $(".btnwrite").click(function(){
+	    	if(<%=sessUser%>==null){
+	        	alert("로그인을 하셔야 작성가능합니다.");
+	        	return false;
+	        }
+	    });
+	});
+</script>
         <main id="board" class="list">
             <h3>글목록</h3>
             <section>

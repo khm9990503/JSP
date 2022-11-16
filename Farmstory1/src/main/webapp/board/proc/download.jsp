@@ -28,7 +28,7 @@
 	response.setHeader("Cache-Control", "private");
 
 	// 파일 다운로드 스트림 작업
-	String savePath = application.getRealPath("/file");
+	String savePath = application.getRealPath("/board/file");
 	File file = new File(savePath+"/"+fb.getNewName());
 	
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
