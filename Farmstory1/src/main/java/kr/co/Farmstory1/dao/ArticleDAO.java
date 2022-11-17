@@ -203,6 +203,59 @@ public class ArticleDAO {
 		return articles;
 	}
 	
+	public List<ArticleBean> selectLatestS() {
+		List<ArticleBean> latests = new ArrayList<>();
+		try {
+			logger.debug("selectLatest...");
+			
+			Connection conn = DBCP.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_LATEST_STORY);
+			
+			while(rs.next()) {
+				ArticleBean ab = new ArticleBean();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				ab.setRdate(rs.getString(3).substring(2,10));
+				latests.add(ab);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("selectLatest size : "+latests.size());
+		return latests;
+	}
+	
+	public List<ArticleBean> selectLatestN(String cate) {
+		List<ArticleBean> latests = new ArrayList<>();
+		try {
+			logger.debug("selectLatest...");
+			
+			Connection conn = DBCP.getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_LATEST_NOTICE);
+			psmt.setString(1, cate);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleBean ab = new ArticleBean();
+				ab.setNo(rs.getInt(1));
+				ab.setTitle(rs.getString(2));
+				
+				latests.add(ab);
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("selectLatest size : "+latests.size());
+		return latests;
+	}
+	
 	public FileBean selectFile(String fno) {
 		logger.info("selectFile start...");
 		FileBean fb = null;

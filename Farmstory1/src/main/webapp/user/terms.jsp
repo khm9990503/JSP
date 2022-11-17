@@ -22,6 +22,7 @@
 	});
 </script>
 <%
+	request.setCharacterEncoding("utf-8");
 	List<String> ts = TermsDao.getInstance().selectTerms();
 %>
         <main id="user" class="terms">

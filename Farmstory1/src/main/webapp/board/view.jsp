@@ -4,6 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
+	if(sessUser==null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101");
+		return;
+	}
+
 	request.setCharacterEncoding("UTF-8");
 	String no = request.getParameter("no");
 	String pg = request.getParameter("pg");

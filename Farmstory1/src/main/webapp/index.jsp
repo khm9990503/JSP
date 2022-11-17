@@ -1,5 +1,48 @@
+<%@page import="kr.co.Farmstory1.bean.ArticleBean"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.Farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%	
+	ArticleDAO ad = ArticleDAO.getInstance();
+	List<ArticleBean> latests = ad.selectLatestS();
+
+	
+%>
+<script>
+$(function() {
+	// 공지사항 최신글 가져오기
+	$.get('/Farmstory1/board/proc/getLatest.jsp?cate=notice',function(data){
+		$('#tabs-1  .loading').remove();
+		
+		for(let latestn of data){
+			//console.log(latestn.title);
+			let url = "/Farmstory1/board/view.jsp?group=community&cate=notice&pg=1&no="+latestn.no;
+			$('#tabs-1 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
+		}
+	});
+	// 고객문의 최신글 가져오기
+	$.get('/Farmstory1/board/proc/getLatest.jsp?cate=one',function(data){
+		$('#tabs-2  .loading').remove();
+		
+		for(let latestn of data){
+			//console.log(latestn.title);
+			let url = "/Farmstory1/board/view.jsp?group=community&cate=one&pg=1&no="+latestn.no;
+			$('#tabs-2 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
+		}
+	});
+	// 자주묻는질문 가져오기
+	$.get('/Farmstory1/board/proc/getLatest.jsp?cate=question',function(data){
+		$('#tabs-3  .loading').remove();
+		
+		for(let latestn of data){
+			//console.log(latestn.title);
+			let url = "/Farmstory1/board/view.jsp?group=community&cate=question&pg=1&no="+latestn.no;
+			$('#tabs-3 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
+		}
+	});
+});
+</script>
    <main>
        <div class="slider">
            <div class="slider2">
@@ -29,41 +72,19 @@
                </a>
                <img src="./img/main_latest1_img.jpg" alt="img">
                <table>
+               <%
+               for(int i=0;i<5;i++){ 
+               	ArticleBean lt = latests.get(i);
+               %>
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
+                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story2&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
                        </td>
-                       <td>22-11-14</td>
+                       <td><%=lt.getRdate()%></td>
                    </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
+               <%} %>
+                  
                </table>
            </div>
            <div>
@@ -72,41 +93,18 @@
                </a>
                <img src="./img/main_latest2_img.jpg" alt="img">
                <table>
+               <%
+               for(int i=5;i<10;i++){ 
+               	ArticleBean lt = latests.get(i);
+               %>
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
+                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story3&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
                        </td>
-                       <td>22-11-14</td>
+                       <td><%=lt.getRdate()%></td>
                    </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
+               <%} %>
                </table>
            </div>
            <div>
@@ -115,41 +113,18 @@
                </a>
                <img src="./img/main_latest3_img.jpg" alt="img">
                <table>
+               <%
+               for(int i=10;i<15;i++){ 
+               	ArticleBean lt = latests.get(i);
+               %>
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
+                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
                        </td>
-                       <td>22-11-14</td>
+                       <td><%=lt.getRdate()%></td>
                    </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
-                   <tr>
-                       <td>></td>
-                       <td>
-                           <a href="#">토마토! 건강하게 길러서 안심하고 먹자!</a>
-                       </td>
-                       <td>22-11-14</td>
-                   </tr>
+               <%} %>
                </table>
            </div>
        </div>
@@ -195,25 +170,19 @@
                      <li><a href="#tabs-3">자주묻는질문</a></li>
                    </ul>
                    <div id="tabs-1">
-                     <ul class="txt">
-                       <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                       <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                       <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                     </ul>
+	                   <ul class="txt">
+	                   	<img src="./img/loading.gif" class="loading">
+	                   </ul>
                    </div>
                    <div id="tabs-2">
-                       <ul class="txt">
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                       </ul>
+                     	<ul class="txt">
+	                   	<img src="./img/loading.gif" class="loading">
+	                   </ul>
                    </div>
                    <div id="tabs-3">
-                       <ul class="txt">
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                           <li>홈페이지 오픈 기념 이벤트를 진행합니다.</li>
-                       </ul>
+                     	<ul class="txt">
+	                   	<img src="./img/loading.gif" class="loading">
+	                   </ul>
                    </div>
                  </div>
            </div>

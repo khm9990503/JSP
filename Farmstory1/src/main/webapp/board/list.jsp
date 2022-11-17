@@ -4,6 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
+	if(sessUser==null){
+	response.sendRedirect("/Farmstory1/user/login.jsp?success=101");
+	return;
+	}
+
 	String group = request.getParameter("group");
 	String cate = request.getParameter("cate");
 	
@@ -49,18 +54,22 @@
 	pageStartNum = total - start;
 	
 	List<ArticleBean> articles = dao.selectArticles(start, cate);
+	
+	int grade = sessUser.getGrade();
 %>
+<%if(cate.equals("notice") || cate.equals("question")){ %>
 <script type="text/javascript">
 	$(function() {
-		//비회원 글쓰기버튼 클릭이벤트
+		//관리자 전용 글쓰기버튼 클릭이벤트
 	    $(".btnwrite").click(function(){
-	    	if(<%=sessUser%>==null){
-	        	alert("로그인을 하셔야 작성가능합니다.");
+	    	if(<%=sessUser.getGrade()%>!=1){
+	        	alert("관리자만 작성가능합니다.");
 	        	return false;
 	        }
 	    });
 	});
 </script>
+<% }%>
         <main id="board" class="list">
             <h3>글목록</h3>
             <section>

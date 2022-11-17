@@ -12,6 +12,12 @@ input, textarea {border: none;}
     height: auto;
     margin: 0 auto;
 }
+
+.loading {
+	display: block;
+	width: 60px;
+	margin: 0 auto;
+}
 /*헤더*/
 header {
     position: relative;
