@@ -64,6 +64,7 @@
                             <div>
                                 <input type="text" name="addr2" id="addr2" placeholder="상세주소를 입력하세요">
                             </div>
+                        </td>
                     </tr>
             </table>
             <div>
