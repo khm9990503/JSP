@@ -131,6 +131,29 @@ public class UserDAO extends DBHelper{
 		logger.debug("vo : "+vo);
 		return vo;
 	}
+	public UserVO selectUserFind(String name, String email) {
+		UserVO vo = null;
+		try {
+			logger.info("selectUser start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FIND);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new UserVO();
+				vo.setUid(rs.getString(1));
+				vo.setName(rs.getString(3));
+				vo.setEmail(rs.getString(5));
+				vo.setRdate(rs.getString(12));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("vo : "+vo);
+		return vo;
+	}
 	public void selectUsers() {}
 	public void updateUser() {}
 	public void modifyUser() {}

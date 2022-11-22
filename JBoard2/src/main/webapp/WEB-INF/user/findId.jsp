@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/_header.jsp"/>
+<script>
+	let success = ${success};
+		
+	if(success == "100"){
+		alert('일치하는 회원이 없습니다.\n이름, 이메일을 다시 확인 하시기 바랍니다.');
+	}
+</script>
 <script type="text/javascript">
 	let regName = /^[가-힣]{2,4}$/;
 	
@@ -84,7 +91,7 @@
 			}
 		});
 		// 폼 전송이 시작될 때 실행되는 폼 이벤트(폼 전송 버튼을 클릭했을때)
-		$('.btnNext').submit(function(e) {
+		$('.findId>form').submit(function(e) {
 			
 			// 폼 데이터 유효성 검증 Validation
 			// 3.이름 검증
