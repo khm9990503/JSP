@@ -12,7 +12,7 @@
                     <td>아이디</td>
                     <td>
                         <input type="text" name="uid" placeholder="아이디 입력"/>
-                        <button type="button" id="btnUidCheck"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnUidCheck"><img src="/JBoard2/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="uidResult"></span>
                     </td>
                 </tr>
@@ -38,7 +38,7 @@
                     <td>
                         <p class="nickInfo">공백없는 한글, 영문, 숫자 입력</p>
                         <input type="text" name="nick" placeholder="별명 입력"/>
-                        <button type="button" id="btnNickCheck"><img src="../img/chk_id.gif" alt="중복확인"/></button>
+                        <button type="button" id="btnNickCheck"><img src="/JBoard2/img/chk_id.gif" alt="중복확인"/></button>
                         <span class="nickResult"></span>
                     </td>
                 </tr>
@@ -46,10 +46,11 @@
                     <td>이메일</td>
                     <td>
                         <input type="email" name="email" placeholder="이메일 입력"/>
-                        <button type="button"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <button type="button" id="btnEmail"><img src="/JBoard2/img/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <span class="resultEmail"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
-                            <button type="button"><img src="../img/chk_confirm.gif" alt="확인"/></button>
+                            <button type="button" id="btnEmailConfirm"><img src="/JBoard2/img/chk_confirm.gif" alt="확인"/></button>
                         </div>
                     </td>
                 </tr>
@@ -58,20 +59,20 @@
                     <td><input type="text" name="hp" placeholder="휴대폰 입력"/><span class="resultHp"></span></td>
                 </tr>
                 <tr>
-                <td>주소</td>
-                <td>
-                    <div>
-                        <input type="text" name="zip" id="zip" placeholder="우편번호" readonly>
-                        <button type="button" onclick="postcode()">
-                        <img src="/JBoard2/img/chk_post.gif" alt="우편번호 찾기">
-                        </button>
-                    </div>
-                    <div>
-                        <input type="text" name="addr1" id="addr1" placeholder="주소를 검색하세요" readonly>
-                    </div>
-                    <div>
-                        <input type="text" name="addr2" id="addr2" placeholder="상세주소를 입력하세요">
-                    </div>
+	                <td>주소</td>
+	                <td>
+	                    <div>
+	                        <input type="text" name="zip" id="zip" placeholder="우편번호" readonly>
+	                        <button type="button" onclick="postcode()">
+	                        <img src="/JBoard2/img/chk_post.gif" alt="우편번호 찾기">
+	                        </button>
+	                    </div>
+	                    <div>
+	                        <input type="text" name="addr1" id="addr1" placeholder="주소를 검색하세요" readonly>
+	                    </div>
+	                    <div>
+	                        <input type="text" name="addr2" id="addr2" placeholder="상세주소를 입력하세요">
+	                    </div>
                 </td>
             </tr>
             </table>

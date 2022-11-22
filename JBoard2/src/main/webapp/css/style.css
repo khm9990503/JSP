@@ -568,8 +568,17 @@ footer > p {
     margin-bottom: 12px;
     line-height: 20px;
 }
+#user > .find > form > p {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    line-height: 20px;
+}
 
 #user > .find > div {
+    float: right;
+    margin-top: 10px;
+}
+#user > .find > form > div {
     float: right;
     margin-top: 10px;
 }

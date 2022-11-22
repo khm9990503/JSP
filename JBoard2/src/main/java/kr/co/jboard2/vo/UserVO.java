@@ -7,7 +7,7 @@ public class UserVO {
 	private String nick;
 	private String email;
 	private String hp;
-	private String grade;
+	private int grade;
 	private String zip;
 	private String addr1;
 	private String addr2;
@@ -50,10 +50,10 @@ public class UserVO {
 	public void setHp(String hp) {
 		this.hp = hp;
 	}
-	public String getGrade() {
+	public int getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 	public String getZip() {
