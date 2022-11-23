@@ -38,7 +38,7 @@ public class FindIdController extends HttpServlet{
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		
-		UserVO vo = UserDAO.getInstance().selectUserFind(name, email);
+		UserVO vo = UserDAO.getInstance().selectUserForFindId(name, email);
 		
 		if(vo!=null) {
 			HttpSession session = req.getSession();

@@ -131,12 +131,12 @@ public class UserDAO extends DBHelper{
 		logger.debug("vo : "+vo);
 		return vo;
 	}
-	public UserVO selectUserFind(String name, String email) {
+	public UserVO selectUserForFindId(String name, String email) {
 		UserVO vo = null;
 		try {
-			logger.info("selectUser start...");
+			logger.info("selectUserForFindId start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_USER_FIND);
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_FINDID);
 			psmt.setString(1, name);
 			psmt.setString(2, email);
 			rs = psmt.executeQuery();
@@ -154,7 +154,42 @@ public class UserDAO extends DBHelper{
 		logger.debug("vo : "+vo);
 		return vo;
 	}
+	public String selectUserForFindPw(String uid, String email) {
+		String vo = null;
+		try {
+			logger.info("selectUserForFindPW start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.SELECT_USER_FOR_FINDPW);
+			psmt.setString(1, uid);
+			psmt.setString(2, email);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = rs.getString(1);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("vo : "+vo);
+		return vo;
+	}
 	public void selectUsers() {}
 	public void updateUser() {}
+	public int updateUserPw(String pass, String uid) {
+		int result = 0;
+		try {
+			logger.info("updateUserPw start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.UPDATE_USER_PW);
+			psmt.setString(1, pass);
+			psmt.setString(2, uid);
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : "+result);
+		return result;
+	}
 	public void modifyUser() {}
 }

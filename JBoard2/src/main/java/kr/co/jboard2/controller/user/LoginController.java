@@ -27,6 +27,9 @@ public class LoginController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession sess = req.getSession();
+		sess.removeAttribute("vo");
+		
 		String success = req.getParameter("success");
 		
 		req.setAttribute("success", success);

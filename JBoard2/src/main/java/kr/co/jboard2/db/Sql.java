@@ -16,7 +16,8 @@ public class Sql {
 											+ "`addr1`=?, "
 											+ "`addr2`=?";
 	public static final String SELECT_USER = "select * from `board_user` where `uid`=? and `pass`=SHA2(?,256)";
-	public static final String SELECT_USER_FIND = "select * from `board_user` where `name`=? and `email`=?";
+	public static final String SELECT_USER_FOR_FINDID = "select * from `board_user` where `name`=? and `email`=?";
+	public static final String SELECT_USER_FOR_FINDPW = "select `uid` from `board_user` where `uid`=? and `email`=?";
 	public static final String SELECT_COUNT_UID = "select count('uid') from `board_user` where `uid`=?";
 	public static final String SELECT_COUNT_NICK = "select count('nick') from `board_user` where `nick`=?";
 	public static final String SELECT_TERMS = "select * from `board_terms`";
@@ -62,6 +63,7 @@ public class Sql {
 														+ "JOIN `board_user` AS b USING(`uid`) "
 														+ "WHERE `parent`!=0 ORDER BY `no` DESC LIMIT 1";
 	
+	public static final String UPDATE_USER_PW = "update `board_user` set `pass`=SHA2(?,256) where `uid`=?";
 	public static final String UPDATE_ARTICLE = "update `board_article` set `title`=?,`content`=?,`rdate`=now() where `no`=?";
 	public static final String UPDATE_ARTICLE_HIT = "update `board_article` set `hit` = `hit` + 1 where `no`=?";
 	public static final String UPDATE_FILE_DOWNLOAD = "update `board_file` set `download`=`download`+1 where `fno`=?";

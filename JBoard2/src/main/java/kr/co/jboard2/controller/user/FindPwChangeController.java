@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.jboard2.dao.UserDAO;
+
 @WebServlet("/user/findPwChange.do")
 public class FindPwChangeController extends HttpServlet{
 
@@ -21,12 +23,28 @@ public class FindPwChangeController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String success = req.getParameter("success");
+		String vo = req.getParameter("vo");
+		
+		req.setAttribute("success", success);
+		req.setAttribute("vo", vo);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/user/findPwChange.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pass = req.getParameter("pass2");
+		String uid = req.getParameter("uid");
 		
+		int result = UserDAO.getInstance().updateUserPw(pass, uid);
+		
+		if(result > 0) {
+			resp.sendRedirect("/JBoard2/user/login.do?success=301");
+		}else {
+			resp.sendRedirect("/JBoard2/user/findPwChange.do?success=100");
+		}
 	}
 }
