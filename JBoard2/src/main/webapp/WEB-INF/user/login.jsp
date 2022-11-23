@@ -21,7 +21,7 @@
             <table border="0">
                 <tr>
                     <td><img src="/JBoard2/img/login_ico_id.png" alt="아이디"/></td>
-                    <td><input type="text" name="uid" placeholder="아이디 입력"/></td>
+                    <td><input type="text" name="uid" placeholder="아이디 입력" value="${loginId}"/></td>
                 </tr>
                 <tr>
                     <td><img src="/JBoard2/img/login_ico_pw.png" alt="비밀번호"/></td>
@@ -29,7 +29,7 @@
                 </tr>
             </table>
             <input type="submit" value="로그인" class="btnLogin"/>
-            <label><input type="checkbox" name="saveUid">아이디 기억하기</label>
+            <label><input type="checkbox" name="saveUid" value="Y" ${cookieCheck}>아이디 기억하기</label>
         </form>
         <div>
             <h3>회원 로그인 안내</h3>
