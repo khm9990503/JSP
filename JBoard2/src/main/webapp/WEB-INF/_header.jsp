@@ -16,7 +16,7 @@
             	<c:if test="${sessUser!=null}">
             		<p>
 		                <span>${sessUser.nick}</span>님 반갑습니다.
-		                <a href="/JBoard2/user/logout.do">[로그아웃]</a>
+		                <a href="/JBoard2/user/logout.do?uid=${sessUser.uid}">[로그아웃]</a>
             		</p>
             	</c:if>
         </header>
