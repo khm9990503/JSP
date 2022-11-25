@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.jboard2.dao.ArticleDAO;
+import kr.co.jboard2.service.ArticleService;
 import kr.co.jboard2.vo.ArticleVO;
 
 @WebServlet("/list.do")
@@ -19,7 +20,7 @@ public class ListController extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private ArticleService service = ArticleService.INSTANCE;
 	@Override
 	public void init() throws ServletException {
 		
@@ -33,11 +34,8 @@ public class ListController extends HttpServlet{
 		
 		int start = 0;
 		int total = 0;
-		int lastPageNum = 0;
 		int currentPage = 1;
 		int currentPageGroup = 1;
-		int pageGroupStart = 0;
-		int pageGroupEnd = 0;
 		int pageStartNum = 0;
 		
 		if(pg!=null){
@@ -45,24 +43,24 @@ public class ListController extends HttpServlet{
 		}
 		
 		start = (currentPage - 1) * 10;
-		currentPageGroup = (int)Math.ceil(currentPage / 10.0);
-		pageGroupStart = (currentPageGroup - 1) * 10 + 1;
-		pageGroupEnd = currentPageGroup * 10;
+		
+		
 		
 		ArticleDAO dao = ArticleDAO.getInstance();
 		
 		//전체 게시물 갯수
-		total = dao.selectCountTotal();
+		if(search == null) {
+			total = dao.selectCountTotal();
+		}else {
+			total = dao.selectCountTotalBySearch(search);
+		}
+		
 		
 		//마지막 페이지 번호
-		if(total % 10 == 0){
-			lastPageNum = total / 10;
-		}else{
-			lastPageNum = total / 10 + 1;
-		}
-		if(pageGroupEnd > lastPageNum){
-			pageGroupEnd = lastPageNum;
-		}
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이지 그룹 start, end 번호
+		int[] result = service.getPageGroupNum(currentPageGroup, lastPageNum);
 		
 		pageStartNum = total - start;
 		
@@ -78,8 +76,8 @@ public class ListController extends HttpServlet{
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("currentPageGroup", currentPageGroup);
-		req.setAttribute("pageGroupStart", pageGroupStart);
-		req.setAttribute("pageGroupEnd", pageGroupEnd);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		req.setAttribute("articles", articles);
 		

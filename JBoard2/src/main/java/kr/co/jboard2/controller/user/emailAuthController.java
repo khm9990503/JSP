@@ -43,7 +43,7 @@ public class emailAuthController extends HttpServlet{
 		String password = "zobqiuynvkhwmidd";
 		
 		
-		String title = "JBoard2 인증코드 입니다.";
+		String title = "JBoard2 code.";
 		String content = "인증코드 6자리는 "+code+" 입니다.";
 		
 		// Gmail SMTP 정보 설정
@@ -87,6 +87,9 @@ public class emailAuthController extends HttpServlet{
 		JsonObject json = new JsonObject();
 		json.addProperty("status", status);
 		json.addProperty("code", code);
+		
+		resp.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html; charset=UTF-8");
 		
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
