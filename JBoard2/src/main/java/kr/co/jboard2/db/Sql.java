@@ -44,15 +44,16 @@ public class Sql {
 											+ "`rdate`=NOW()";
 	public static final String SELECT_MAX_NO = "select max(`no`) from `board_article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(`no`) FROM `board_article` where `parent`=0";
-	public static final String SELECT_COUNT_TOTAL_BY_SEARCH = "SELECT COUNT(`no`) FROM `board_article` where `parent`=0 "
-															+ "AND (`nick` LIKE '%?%' OR `title` LIKE '%?%')";
+	public static final String SELECT_COUNT_TOTAL_BY_KEYWORD = "SELECT COUNT(`no`) FROM `board_article` AS a JOIN "
+															+ "`board_user` AS b ON a.uid = b.uid where `parent`=0 "
+															+ "AND (`nick` LIKE ? OR `title` LIKE ?)";
 	
 	public static final String SELECT_ARTICLES = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
 												+ "where `parent`=0 "
 												+ "order by `no` desc "
 												+ "limit ?,10";
-	public static final String SELECT_ARTICLES_BY_SEARCH = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
-															+ "where `parent`=0 AND (`nick` LIKE '%?%' OR `title` LIKE '%?%') "
+	public static final String SELECT_ARTICLES_BY_KEYWORD = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
+															+ "where `parent`=0 AND (`nick` LIKE ? OR `title` LIKE ?) "
 															+ "order by `no` DESC "
 															+ "LIMIT ?,10";
 	public static final String SELECT_ARTICLE = "SELECT a.*, b.`fno`, b.`oriName`, b.`download` "

@@ -55,7 +55,6 @@ public class ListController extends HttpServlet{
 			total = dao.selectCountTotalBySearch(search);
 		}
 		
-		
 		//마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
 		
@@ -68,9 +67,10 @@ public class ListController extends HttpServlet{
 		if(search == null) {
 			articles = dao.selectArticles(start);
 		}else {
-			articles = dao.selectArticlesBySearch(start, search);
+			articles = service.selectArticlesByKeyword(search, start);
 		}
 		req.setAttribute("pg", pg);
+		req.setAttribute("search", search);
 		req.setAttribute("start", start);
 		req.setAttribute("total", total);
 		req.setAttribute("lastPageNum", lastPageNum);

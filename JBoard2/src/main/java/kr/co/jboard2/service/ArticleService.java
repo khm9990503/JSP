@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +31,10 @@ public enum ArticleService {
 		return dao.selectArticle(no);
 	}
 	public void selectArticles() {}
+	public List<ArticleVO> selectArticlesByKeyword(String keyword, int start) {
+		return dao.selectArticlesByKeyword(keyword, start);
+	}
+	
 	public void updateArticle() {}
 	public void deleteArticle() {}
 	

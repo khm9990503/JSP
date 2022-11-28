@@ -170,14 +170,14 @@ public class ArticleDAO extends DBHelper{
 		}
 		return articles;
 	}
-	public List<ArticleVO> selectArticlesBySearch(int start, String search) {
+	public List<ArticleVO> selectArticlesByKeyword(String search, int start) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticlesBySearch start...");
+			logger.info("selectArticlesByKeyword start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_SEARCH);
-			psmt.setString(1, search);
-			psmt.setString(2, search);
+			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
+			psmt.setString(1, "%"+search+"%");
+			psmt.setString(2, "%"+search+"%");
 			psmt.setInt(3, start);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
@@ -281,9 +281,9 @@ public class ArticleDAO extends DBHelper{
 		try {
 			logger.info("selectCountTotal start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_BY_SEARCH);
-			psmt.setString(1, search);
-			psmt.setString(2, search);
+			psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL_BY_KEYWORD);
+			psmt.setString(1, "%"+search+"%");
+			psmt.setString(2, "%"+search+"%");
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
@@ -328,7 +328,49 @@ public class ArticleDAO extends DBHelper{
 		}
 		return result;
 	}
-	public void deleteArticle() {}
+	public void deleteArticle(String no) {
+		logger.info("deleteArticle start...");
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	public String deleteFile(String no) {
+		logger.info("deleteFile start...");
+		String newName = null;
+		try {
+			conn = getConnection();
+			
+			conn.setAutoCommit(false);
+			
+			PreparedStatement psmt1 = conn.prepareStatement(Sql.SELECT_FILE_WITH_PARENT);
+			PreparedStatement psmt2 = conn.prepareStatement(Sql.DELETE_FILE);
+			psmt1.setString(1, no);
+			psmt2.setString(1, no);
+			
+			rs = psmt1.executeQuery();
+			psmt2.executeUpdate();
+			
+			conn.commit();
+			
+			if(rs.next()) {
+				newName = rs.getString(3);
+			}
+			
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return newName;
+	}
 	// 댓글 삭제
 	public int deleteComment(String no, String parent) {
 		logger.info("deleteComment start...");
