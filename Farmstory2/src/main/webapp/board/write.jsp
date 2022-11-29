@@ -1,13 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/_header.jsp"/>
-<%
-	String group = request.getParameter("group");
-	String cate = request.getParameter("cate");
-	
-	pageContext.include("./_"+group+".jsp");
-	
-%>
-<script type="text/javascript" src="/Farmstory1/board/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<jsp:include page="./_${group}.jsp"/>
+<script type="text/javascript" src="/Farmstory2/board/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function(){
@@ -15,7 +9,7 @@
 		      oAppRef: oEditors,
 		      elPlaceHolder: "ir1",
 		      //SmartEditor2Skin.html 파일이 존재하는 경로
-		      sSkinURI: "/Farmstory1/board/se2/SmartEditor2Skin.html",  
+		      sSkinURI: "/Farmstory2/board/se2/SmartEditor2Skin.html",  
 		      htParams : {
 		          // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 		          bUseToolbar : true,             
@@ -46,14 +40,14 @@
 		    });
 	});
 </script>
-        <main id="board" class="write">
-            <h3>글쓰기</h3>
-            <section>
-                <form action="/Farmstory1/board/proc/writeProc.jsp" method="post" enctype="multipart/form-data" id="frm">
-              	<input type="hidden" name="uid"/>
-              	<input type="hidden" name="group"/>
-              	<input type="hidden" name="cate"/>
+        <main id="board" >
+            <section class="write">
+                <form action="/Farmstory2/board/write.do" method="post" enctype="multipart/form-data" id="frm">
+              	<input type="hidden" name="uid" value="${sessUser.uid}"/>
+              	<input type="hidden" name="group" value="${group }"/>
+              	<input type="hidden" name="cate" value="${cate}"/>
                   <table>
+                  	<caption>글쓰기</caption>
                       <tr>
                           <th>제목</th>
                           <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
@@ -72,7 +66,7 @@
                       </tr>
                   </table>
                   <div>
-                      <a href="#">취소</a>
+                      <a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}" class="btn btnCancel">취소</a>
                       <input type="submit" class="btn btnComplete" value="작성완료">
                   </div>
                 </form>

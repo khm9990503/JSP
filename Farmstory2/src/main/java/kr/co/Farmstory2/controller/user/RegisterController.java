@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.Farmstory2.dao.UserDAO;
+import kr.co.Farmstory2.vo.UserVO;
+
+
 @WebServlet("/user/register.do")
 public class RegisterController extends HttpServlet{
 	/**
@@ -29,6 +33,32 @@ public class RegisterController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 수신
+		String uid = req.getParameter("uid");
+		String pass = req.getParameter("pass1");
+		String name = req.getParameter("name");
+		String nick = req.getParameter("nick");
+		String email = req.getParameter("email");
+		String hp = req.getParameter("hp");
+		String zip = req.getParameter("zip");
+		String addr1 = req.getParameter("addr1");
+		String addr2 = req.getParameter("addr2");
+		String regip = req.getRemoteAddr();
+	
+		UserVO vo = new UserVO();
+		vo.setUid(uid);
+		vo.setPass(pass);
+		vo.setName(name);
+		vo.setNick(nick);
+		vo.setEmail(email);
+		vo.setHp(hp);
+		vo.setZip(zip);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setRegip(regip);
 		
+		UserDAO.getInstance().insertUser(vo);
+		
+		resp.sendRedirect("/Farmstory2/user/login.do");
 	}
 }

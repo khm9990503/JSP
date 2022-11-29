@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/_header.jsp"/>
-<script type="text/javascript" src="/Farmstory1/board/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<jsp:include page="./_${group}.jsp"/>
+<script type="text/javascript" src="/Farmstory2/board/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
 var oEditors = [];
 $(function(){
@@ -8,7 +9,7 @@ $(function(){
 	      oAppRef: oEditors,
 	      elPlaceHolder: "ir1",
 	      //SmartEditor2Skin.html 파일이 존재하는 경로
-	      sSkinURI: "/Farmstory1/board/se2/SmartEditor2Skin.html",  
+	      sSkinURI: "/Farmstory2/board/se2/SmartEditor2Skin.html",  
 	      htParams : {
 	          // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 	          bUseToolbar : true,             
@@ -39,15 +40,15 @@ $(function(){
 	    });
 });
 </script>
-        <main id="board" class="write">
-            <h3>글수정</h3>
-            <section>
-                <form action="/Farmstory1/board/proc/modifyProc.jsp" method="post" id="frm">
-                	<input type="hidden" name="no" >
+        <main id="board">
+            <section class="modify">
+                <form action="/Farmstory2/board/proc/modifyProc.jsp" method="post" id="frm">
+                	<input type="hidden" name="no">
                 	<input type="hidden" name="pg">
                 	<input type="hidden" name="group">
                 	<input type="hidden" name="cate">
                     <table>
+                    	<caption>글수정</caption>
                         <tr>
                             <th>제목</th>
                             <td><input type="text" name="title" placeholder="제목을 입력하세요." value=""></td>
@@ -60,8 +61,8 @@ $(function(){
                         </tr>
                     </table>
                     <div>
-                        <a href="#" class="btnCancel">취소</a>
-                        <input type="submit" class="btnComplete" value="수정완료">
+                        <a href="#" class="btn btnCancel">취소</a>
+                        <input type="submit" class="btn btnComplete" value="수정완료">
                     </div>
                 </form>
             </section>

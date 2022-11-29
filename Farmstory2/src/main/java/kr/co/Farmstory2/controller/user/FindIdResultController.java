@@ -9,15 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Farmstory2.dao.UserDAO;
-import kr.co.Farmstory2.vo.TermsVO;
+@WebServlet("/user/findIdResult.do")
+public class FindIdResultController extends HttpServlet{
 
-
-@WebServlet("/user/terms.do")
-public class TermsController extends HttpServlet{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -28,11 +22,8 @@ public class TermsController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		TermsVO vo = UserDAO.getInstance().selectTerms();
-
-		req.setAttribute("vo", vo);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/terms.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findIdResult.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

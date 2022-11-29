@@ -10,14 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Farmstory2.dao.UserDAO;
-import kr.co.Farmstory2.vo.TermsVO;
 
 
-@WebServlet("/user/terms.do")
-public class TermsController extends HttpServlet{
-	/**
-	 * 
-	 */
+@WebServlet("/user/findPwChange.do")
+public class FindPwChangeController extends HttpServlet{
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -28,16 +25,27 @@ public class TermsController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		TermsVO vo = UserDAO.getInstance().selectTerms();
-
+		String success = req.getParameter("success");
+		String vo = req.getParameter("vo");
+		
+		req.setAttribute("success", success);
 		req.setAttribute("vo", vo);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/terms.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPwChange.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pass = req.getParameter("pass2");
+		String uid = req.getParameter("uid");
 		
+		int result = UserDAO.getInstance().updateUserPw(pass, uid);
+		
+		if(result > 0) {
+			resp.sendRedirect("/Farmstory2/user/login.do?success=301");
+		}else {
+			resp.sendRedirect("/Farmstory2/user/findPwChange.do?success=100");
+		}
 	}
 }

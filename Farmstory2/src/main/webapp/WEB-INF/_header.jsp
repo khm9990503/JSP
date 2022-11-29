@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Farmstory::index</title>
-    <link rel="stylesheet" href="/Farmstory2/css/style.css ">
-    <link rel="stylesheet" href="/Farmstory2/css/UserStyle.css ">
+    <title>Farmstory</title>
     <link rel="stylesheet" href="/Farmstory2/css/BoardStyle.css ">
+    <link rel="stylesheet" href="/Farmstory2/css/style.css ">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
@@ -26,12 +27,23 @@
             <a href="/Farmstory2/index.jsp" class="logo">
                 <img src="/Farmstory2/img/logo.png" alt="logo">
             </a>
+            <c:choose>
+            <c:when test="${sessUser == null}">
             <p>
-                <a href="/Farmstory2/index.do">HOME |</a>
+                <a href="/Farmstory2/">HOME |</a>
                 <a href="/Farmstory2/user/login.do">로그인 |</a>
                 <a href="/Farmstory2/user/terms.do">회원가입 |</a>
                 <a href="#">고객센터</a>
             </p>
+            </c:when>
+            <c:otherwise>
+            <p>
+            	<a href="/Farmstory2/">HOME |</a>
+	            <span class="nick">${sessUser.nick}</span>님 반갑습니다.
+	            <a href="/Farmstory2/user/logout.do" class="logout">[로그아웃]</a>
+            </p>
+            </c:otherwise>
+            </c:choose>
             <img src="/Farmstory2/img/head_txt_img.png" alt="3만원 이상 무료배송">
             <ul class="gnb">
                 <li>

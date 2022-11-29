@@ -1,20 +1,21 @@
-package kr.co.Farmstory2.controller.user;
+package kr.co.Farmstory2.controller.board;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Farmstory2.dao.UserDAO;
-import kr.co.Farmstory2.vo.TermsVO;
+import com.google.gson.JsonObject;
+
+import kr.co.Farmstory2.dao.ArticleDAO;
 
 
-@WebServlet("/user/terms.do")
-public class TermsController extends HttpServlet{
+@WebServlet("/board/commentDelete.do")
+public class commentDeleteController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -27,13 +28,18 @@ public class TermsController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String no = req.getParameter("no");
+		String parent = req.getParameter("parent");
 		
-		TermsVO vo = UserDAO.getInstance().selectTerms();
-
-		req.setAttribute("vo", vo);
+		int result = ArticleDAO.getInstance().deleteComment(no, parent);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/terms.jsp");
-		dispatcher.forward(req, resp);
+		// json 출력
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		json.addProperty("no", no);
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
 	}
 	
 	@Override

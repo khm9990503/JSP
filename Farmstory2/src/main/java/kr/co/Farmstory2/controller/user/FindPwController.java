@@ -8,13 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.Farmstory2.dao.UserDAO;
-import kr.co.Farmstory2.vo.TermsVO;
 
 
-@WebServlet("/user/terms.do")
-public class TermsController extends HttpServlet{
+@WebServlet("/user/findPw.do")
+public class FindPwController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -22,22 +22,33 @@ public class TermsController extends HttpServlet{
 
 	@Override
 	public void init() throws ServletException {
-		
+	
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession sess = req.getSession();
+		sess.removeAttribute("vo");
 		
-		TermsVO vo = UserDAO.getInstance().selectTerms();
-
-		req.setAttribute("vo", vo);
+		String success = req.getParameter("success");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/terms.jsp");
+		req.setAttribute("success", success);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPw.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uid = req.getParameter("uid");
+		String email = req.getParameter("email");
 		
+		String vo = UserDAO.getInstance().selectUserForFindPw(uid, email);
+		
+		if(vo!=null) {
+			resp.sendRedirect("/Farmstory2/user/findPwChange.do?vo="+vo);
+		}else {
+			resp.sendRedirect("/Farmstory2/user/findPw.do?success=100");
+		}
 	}
 }
