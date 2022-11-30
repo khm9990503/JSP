@@ -71,6 +71,9 @@ public class Sql {
 														+ "JOIN `board_user` AS b USING(`uid`) "
 														+ "WHERE `parent`!=0 ORDER BY `no` DESC LIMIT 1";
 	
+	public static final String UPDATE_USER_FOR_DROP = "update `board_user` set `grade`=0, `wdate`=NOW() where `uid`=?";
+	public static final String UPDATE_USER_WITH_PASS = "update `board_user` set `pass`=SHA2(?,256),`name`=?,`nick`=?,`email`=?,`hp`=?,`zip`=?,`addr1`=?,`addr2`=? where `uid`=?";
+	public static final String UPDATE_USER = "update `board_user` set `name`=?,`nick`=?,`email`=?,`hp`=?,`zip`=?,`addr1`=?,`addr2`=? where `uid`=?";
 	public static final String UPDATE_USER_PW = "update `board_user` set `pass`=SHA2(?,256) where `uid`=?";
 	public static final String UPDATE_USER_FOR_SESSION = "UPDATE `board_user` SET `sessId`=?, `sessLimitDate`=DATE_ADD(NOW(),INTERVAL 3 DAY) WHERE `uid`=?";
 	public static final String UPDATE_USER_SESSION_OUT = "UPDATE `board_user` SET `sessId`=null, `sessLimitDate`=null WHERE `uid`=?";
