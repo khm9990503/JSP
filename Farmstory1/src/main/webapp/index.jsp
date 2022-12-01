@@ -6,8 +6,6 @@
 <%	
 	ArticleDAO ad = ArticleDAO.getInstance();
 	List<ArticleBean> latests = ad.selectLatestS();
-
-	
 %>
 <script>
 $(function() {

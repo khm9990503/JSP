@@ -10,7 +10,7 @@ $(function(){
 	$('.btnUpdatePw').click(function() {
 		let pass1 = $('input[name=pass1]').val();
 		let pass2 = $('input[name=pass2]').val();
-		if(pass1.equals('') & pass2.equals('')){
+		if(pass1 == '' & pass2== ''){
 			alert("수정할 비밀번호를 입력해주세요.");
 			return;
 		}
@@ -22,25 +22,25 @@ $(function(){
 				"uid":uid
 		}
 		if(!isPassOk){
-			$.ajax({
-			url:'/JBoard2/user/myInfo.do',
-			method:'post',
-			data:jsonData,
-			dataType:'json',
-			success:function(data){
-				if(data.result > 0){
-					// 비번 수정 성공
-					alert("비밀번호 수정 완료.");
-				}else {
-					// 비번 수정 실패
-					alert("나중에 다시 시도하세요.");
-					return;
-				}
-				}
-			});
-		}else{
 			alert("비밀번호를 다시 확인하십시오.");
 			return;
+		}else{
+			$.ajax({
+				url:'/JBoard2/user/myInfo.do',
+				method:'post',
+				data:jsonData,
+				dataType:'json',
+				success:function(data){
+					if(data.result > 0){
+						// 비번 수정 성공
+						alert("비밀번호 수정 완료.");
+					}else {
+						// 비번 수정 실패
+						alert("나중에 다시 시도하세요.");
+						return;
+					}
+					}
+				});
 		}
 		
 	});
