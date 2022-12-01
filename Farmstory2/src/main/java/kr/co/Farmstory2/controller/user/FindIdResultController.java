@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import kr.co.Farmstory2.vo.UserVO;
 
 @WebServlet("/user/findIdResult.do")
 public class FindIdResultController extends HttpServlet{
@@ -21,7 +24,6 @@ public class FindIdResultController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findIdResult.jsp");
 		dispatcher.forward(req, resp);

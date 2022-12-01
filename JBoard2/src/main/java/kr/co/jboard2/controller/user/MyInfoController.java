@@ -1,6 +1,7 @@
 package kr.co.jboard2.controller.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.JsonObject;
 
 import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.vo.UserVO;
@@ -34,7 +37,7 @@ public class MyInfoController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 수신
 		String uid = req.getParameter("uid");
-		String pass = req.getParameter("pass1");
+		String pass = req.getParameter("pass");
 		String name = req.getParameter("name");
 		String nick = req.getParameter("nick");
 		String email = req.getParameter("email");
@@ -45,8 +48,8 @@ public class MyInfoController extends HttpServlet{
 		UserVO vo = new UserVO();
 		UserDAO dao = UserDAO.getInstance();
 		
-		if(pass.equals("")) {
-			// pass 안 바꿀 때
+		if(pass == null) {
+			// 회원수정 누를 때
 			vo.setUid(uid);
 			vo.setName(name);
 			vo.setNick(nick);
@@ -56,20 +59,18 @@ public class MyInfoController extends HttpServlet{
 			vo.setAddr1(addr1);
 			vo.setAddr2(addr2);
 			dao.updateUser(vo);
+			
+			resp.sendRedirect("/JBoard2/user/logout.do?success=401&uid="+uid);
 		}else{
-			// pass 바꿀 때
-			vo.setUid(uid);
-			vo.setPass(pass);
-			vo.setName(name);
-			vo.setNick(nick);
-			vo.setEmail(email);
-			vo.setHp(hp);
-			vo.setZip(zip);
-			vo.setAddr1(addr1);
-			vo.setAddr2(addr2);
-			dao.updateUserWithPass(vo);
+			// 비번수정 누를 때
+			int result = dao.updateUserPw(pass, uid);
+			
+			JsonObject json = new JsonObject();
+			json.addProperty("result", result);
+			PrintWriter out = resp.getWriter();
+			out.print(json.toString());
 		}
 		
-		resp.sendRedirect("/JBoard2/user/logout.do?success=401&uid="+uid);
+		
 	}
 }

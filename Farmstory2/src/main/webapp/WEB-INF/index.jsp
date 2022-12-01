@@ -1,118 +1,78 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/_header.jsp"/>
-<script>
-$(function() {
-	// 공지사항 최신글 가져오기
-	$.get('/Farmstory2/index.do?cate=notice',function(data){
-		$('#tabs-1  .loading').remove();
-		
-		for(let latestn of data){
-			//console.log(latestn.title);
-			let url = "/Farmstory2/board/view.do?group=community&cate=notice&pg=1&no="+latestn.no;
-			$('#tabs-1 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
-		}
-	});
-	// 고객문의 최신글 가져오기
-	$.get('/Farmstory2/index.do?cate=one',function(data){
-		$('#tabs-2  .loading').remove();
-		
-		for(let latestn of data){
-			//console.log(latestn.title);
-			let url = "/Farmstory2/board/view.do?group=community&cate=one&pg=1&no="+latestn.no;
-			$('#tabs-2 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
-		}
-	});
-	// 자주묻는질문 가져오기
-	$.get('/Farmstory2/index.do?cate=question',function(data){
-		$('#tabs-3  .loading').remove();
-		
-		for(let latestn of data){
-			//console.log(latestn.title);
-			let url = "/Farmstory2/board/view.do?group=community&cate=question&pg=1&no="+latestn.no;
-			$('#tabs-3 .txt').append("<li><a href='"+url+"'>* "+latestn.title+"</a></li>");
-		}
-	});
-});
-</script>
    <main>
        <div class="slider">
            <div class="slider2">
-               <div><img src="./img/main_slide_img1.jpg" alt="sld"></div>
-               <div><img src="./img/main_slide_img2.jpg" alt="sld"></div>
-               <div><img src="./img/main_slide_img3.jpg" alt="sld"></div>
+               <div><img src="/Farmstory2/img/main_slide_img1.jpg" alt="sld"></div>
+               <div><img src="/Farmstory2/img/main_slide_img2.jpg" alt="sld"></div>
+               <div><img src="/Farmstory2/img/main_slide_img3.jpg" alt="sld"></div>
            </div>
            <img src="./img/main_slide_img_tit.png" alt="사람과 자연을">
            <div class="banner">
-               <img src="./img/main_banner_txt.png" alt="grand open">
-               <img src="./img/main_banner_tit.png" alt="오픈기념 30%">
-               <img src="./img/main_banner_img.png" alt="과일">
+               <img src="/Farmstory2/img/main_banner_txt.png" alt="grand open">
+               <img src="/Farmstory2/img/main_banner_tit.png" alt="오픈기념 30%">
+               <img src="/Farmstory2/img/main_banner_img.png" alt="과일">
            </div>
        </div>
        <div class="quick">
-           <a href="/Farmstory1/board/list.jsp?group=community&cate=today">
-               <img src="./img/main_banner_sub1_tit.png" alt="오늘의 식단">
+           <a href="/Farmstory2/board/list.do?group=community&cate=today">
+               <img src="/Farmstory2/img/main_banner_sub1_tit.png" alt="오늘의 식단">
            </a>
-           <a href="/Farmstory1/board/list.jsp?group=community&cate=chef">
-               <img src="./img/main_banner_sub2_tit.png" alt="나도 요리사">
+           <a href="/Farmstory2/board/list.do?group=community&cate=chef">
+               <img src="/Farmstory2/img/main_banner_sub2_tit.png" alt="나도 요리사">
            </a>
        </div>
        <div class="latest">
            <div>
                <a href="#">
-                   <img src="./img/main_latest1_tit.png" alt="텃밭">
+                   <img src="/Farmstory2/img/main_latest1_tit.png" alt="텃밭">
                </a>
-               <img src="./img/main_latest1_img.jpg" alt="img">
+               <img src="/Farmstory2/img/main_latest1_img.jpg" alt="img">
                <table>
-               <c:forEach var="lt" items="${latests}" begin="1" end="5">
+               <c:forEach var="i" items="${latests}" begin="0" end="4">
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story2&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story2&pg=1&no=${i.no }">${i.title }</a>
                        </td>
-                       <td><%=lt.getRdate()%></td>
+                       <td>${i.rdate }</td>
                    </tr>
                </c:forEach>
                </table>
            </div>
            <div>
                <a href="#">
-                   <img src="./img/main_latest2_tit.png" alt="텃밭">
+                   <img src="/Farmstory2/img/main_latest2_tit.png" alt="텃밭">
                </a>
-               <img src="./img/main_latest2_img.jpg" alt="img">
+               <img src="/Farmstory2/img/main_latest2_img.jpg" alt="img">
                <table>
-               <%
-               for(int i=5;i<10;i++){ 
-               	ArticleBean lt = latests.get(i);
-               %>
+              <c:forEach var="i" items="${latests}" begin="5" end="9">
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story3&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story3&pg=1&no=${i.no }">${i.title }</a>
                        </td>
-                       <td><%=lt.getRdate()%></td>
+                       <td>${i.rdate }</td>
                    </tr>
-               <%} %>
+               </c:forEach>
                </table>
            </div>
            <div>
                <a href="#">
-                   <img src="./img/main_latest3_tit.png" alt="텃밭">
+                   <img src="/Farmstory2/img/main_latest3_tit.png" alt="텃밭">
                </a>
-               <img src="./img/main_latest3_img.jpg" alt="img">
+               <img src="/Farmstory2/img/main_latest3_img.jpg" alt="img">
                <table>
-               <%
-               for(int i=10;i<15;i++){ 
-               	ArticleBean lt = latests.get(i);
-               %>
+               <c:forEach var="i" items="${latests}" begin="10" end="14">
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory1/board/view.jsp?group=story&cate=story&pg=1&no=<%=lt.getNo()%>"><%=lt.getTitle()%></a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story&pg=1&no=${i.no }">${i.title }</a>
                        </td>
-                       <td><%=lt.getRdate()%></td>
+                       <td>${i.rdate }</td>
                    </tr>
-               <%} %>
+               </c:forEach>
                </table>
            </div>
        </div>
@@ -129,10 +89,10 @@ $(function() {
                    </p>
                </div>
                <div class="btns">
-                   <a href="/Farmstory1/board/list.jsp?group=community&cate=one">
+                   <a href="/Farmstory2/board/list.do?group=community&cate=one">
                        <img src="./img/main_sub2_cs_bt1.png" alt="1:1">
                    </a>
-                   <a href="/Farmstory1/board/list.jsp?group=community&cate=question">
+                   <a href="/Farmstory2/board/list.do?group=community&cate=question">
                        <img src="./img/main_sub2_cs_bt2.png" alt="자주">
                    </a>
                    <a href="#">
@@ -141,7 +101,7 @@ $(function() {
                </div>
            </div>
            <div>
-               <img src="./img/main_sub2_account_tit.png" class="tit" alt="계좌안내">
+               <img src="/Farmstory2/img/main_sub2_account_tit.png" class="tit" alt="계좌안내">
                <p class="account">
                    기업은행 123-456789-01-01-012<br>
                    국민은행 01-1234-56789<br>
@@ -159,17 +119,23 @@ $(function() {
                    </ul>
                    <div id="tabs-1">
 	                   <ul class="txt">
-	                   	<img src="./img/loading.gif" class="loading">
+	                   	<c:forEach var="i" items="${latestN}">
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=notice&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	</c:forEach>
 	                   </ul>
                    </div>
                    <div id="tabs-2">
                      	<ul class="txt">
-	                   	<img src="./img/loading.gif" class="loading">
+	                   	<c:forEach var="i" items="${latestO}">
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=one&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	</c:forEach>
 	                   </ul>
                    </div>
                    <div id="tabs-3">
                      	<ul class="txt">
-	                   	<img src="./img/loading.gif" class="loading">
+	                   	<c:forEach var="i" items="${latestQ}">
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=question&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	</c:forEach>
 	                   </ul>
                    </div>
                  </div>

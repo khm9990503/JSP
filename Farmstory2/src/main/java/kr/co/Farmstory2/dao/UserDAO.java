@@ -152,7 +152,7 @@ public class UserDAO extends DBHelper{
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("vo : "+vo);
+		logger.debug("vo : "+vo.getName());
 		return vo;
 	}
 	public String selectUserForFindPw(String uid, String email) {

@@ -14,63 +14,23 @@
 	let regPass	 = /^.*(?=^.{5,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
 	// 폼 데이터 검증 결과 상태변수
-	let isPassOk	 = false;
-	let isNameOk	 = false;
-	let isNickOk	 = false;
-	let isEmailOk	 = false;
-	let isHpOk		 = false;
-	let isEmailAuthOk	 = false;
-	let isEmailAuthCodeOk	 = false;
+	let isPassOk	 = true; // 비번 수정 안 해도 submit 가능하게
+	let isNameOk	 = true;
+	let isNickOk	 = true;
+	let isEmailOk	 = true;
+	let isHpOk		 = true;
+	let isEmailAuthOk	 = true;
+	let isEmailAuthCodeOk	 = true;
 	let receivedCode = 0;
 
 	$(function () {
-		
-		// 아이디 우효성 검증 & 중복체크
-		$('input[name=uid]').keydown(function() {
-			isUidOk=false;
-		});
-		
-		$('#btnUidCheck').click(function(){
-			
-			let uid = $('input[name=uid]').val();
-			// 반복되는 체크로 서버 공격 막기
-			if(isUidOk){
-				return;
-			}
-			// 영문 숫자 아이디 4~20자리
-			if(!uid.match(regUid)){
-				isUidOk=false;
-				$('.uidResult').css('color','red').text('아이디가 유효하지 않습니다.');
-				return;
-			}
-			
-			let jsonData = {"uid":uid};
-			
-			$('.uidResult').css('color','black').text('...');
-			
-			//딜레이 주기
-			setTimeout(()=>{
-				$.ajax({
-					url:'/JBoard2/user/checkUid.do',
-					method:'get',
-					data:jsonData,
-					dataType:'json',
-					success:function(data){
-						//console.log(data);
-						if(data.result == 0){
-							isUidOk=true;
-							$('.uidResult').css('color','green').text('사용 가능한 아이디 입니다.');
-						}else{
-							isUidOk=false;
-							$('.uidResult').css('color','red').text('이미 사용중인 아이디 입니다.');
-						}
-					}
-				});
-			
-			},500);
-			
-		});
-		
+		// 비번 수정 시 submit 바로 못 하게
+		$('input[name=pass1]').keydown(function() {
+			    isPassOk	 = false;
+			});
+		$('input[name=pass2]').keydown(function() {
+			    isPassOk	 = false;
+			});
 		
 		
 		// 비밀번호 일치여부 확인
@@ -93,6 +53,8 @@
 				$('.resultPass').css('color','red').text('비밀번호가 일치하지 않습니다.');
 			}
 		});
+		
+		
 		
 		// 이름 유효성 검증
 		

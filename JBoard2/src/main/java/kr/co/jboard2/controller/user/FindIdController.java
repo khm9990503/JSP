@@ -42,7 +42,7 @@ public class FindIdController extends HttpServlet{
 		
 		if(vo!=null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("vo", vo);
+			session.setAttribute("forId", vo);
 			resp.sendRedirect("/JBoard2/user/findIdResult.do");
 		}else {
 			resp.sendRedirect("/JBoard2/user/findId.do?success=100");

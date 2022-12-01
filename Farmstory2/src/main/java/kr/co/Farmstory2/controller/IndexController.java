@@ -30,21 +30,20 @@ public class IndexController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 수신
 		String cate =  req.getParameter("cate");
 		
 		ArticleDAO ad = ArticleDAO.getInstance();
 		List<ArticleVO> latests = ad.selectLatestS();
-		List<ArticleVO> latestn = ad.selectLatestN(cate);
+		List<ArticleVO> latestN = ad.selectLatestN("notice");
+		List<ArticleVO> latestO = ad.selectLatestN("one");
+		List<ArticleVO> latestQ = ad.selectLatestN("question");
 		
+		// 출력
 		req.setAttribute("latests", latests);
-		
-		Gson gson = new Gson();
-		String jsonData = gson.toJson(latestn);
-		
-		resp.setCharacterEncoding("UTF-8");
-		
-		PrintWriter out = resp.getWriter();
-		out.print(jsonData);
+		req.setAttribute("latestN", latestN);
+		req.setAttribute("latestO", latestO);
+		req.setAttribute("latestQ", latestQ);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/index.jsp");
 		dispatcher.forward(req, resp);

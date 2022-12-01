@@ -7,19 +7,19 @@
                 <caption>아이디 찾기 결과</caption>
                 <tr>
                     <td>이름</td>
-                    <td>${vo.name }</td>
+                    <td>${forId.name }</td>
                 </tr>
                 <tr>
                     <td>아이디</td>
-                    <td>${vo.uid }</td>
+                    <td>${forId.uid }</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>${vo.email }</td>
+                    <td>${forId.email }</td>
                 </tr>
                 <tr>
                     <td>가입일</td>
-                    <td>${vo.rdate }</td>
+                    <td>${forId.rdate }</td>
                 </tr>
             </table>                                        
         </form>

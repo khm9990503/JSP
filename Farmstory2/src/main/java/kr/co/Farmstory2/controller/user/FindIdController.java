@@ -43,7 +43,7 @@ public class FindIdController extends HttpServlet{
 		
 		if(vo!=null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("vo", vo);
+			session.setAttribute("forId", vo);
 			resp.sendRedirect("/Farmstory2/user/findIdResult.do");
 		}else {
 			resp.sendRedirect("/Farmstory2/user/findId.do?success=100");

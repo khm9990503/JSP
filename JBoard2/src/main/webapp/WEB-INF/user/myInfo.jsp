@@ -5,6 +5,47 @@
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	// 비번 수정 버튼 클릭 시
+	$('.btnUpdatePw').click(function() {
+		let pass1 = $('input[name=pass1]').val();
+		let pass2 = $('input[name=pass2]').val();
+		if(pass1.equals('') & pass2.equals('')){
+			alert("수정할 비밀번호를 입력해주세요.");
+			return;
+		}
+		
+		let pass = $("input[name=pass2]").val();
+		let uid = $("input[name=uid]").val();
+		let jsonData = {
+				"pass":pass,
+				"uid":uid
+		}
+		if(!isPassOk){
+			$.ajax({
+			url:'/JBoard2/user/myInfo.do',
+			method:'post',
+			data:jsonData,
+			dataType:'json',
+			success:function(data){
+				if(data.result > 0){
+					// 비번 수정 성공
+					alert("비밀번호 수정 완료.");
+				}else {
+					// 비번 수정 실패
+					alert("나중에 다시 시도하세요.");
+					return;
+				}
+				}
+			});
+		}else{
+			alert("비밀번호를 다시 확인하십시오.");
+			return;
+		}
+		
+	});
+	
+	// 회원 탈퇴 버튼 클릭 시
 	$(".btnDrop").click(function() {
 		let uid = $("input[name=uid]").val();
 		let jsonData = {
@@ -48,7 +89,7 @@ $(function(){
                 <tr>
                     <td>비밀번호 확인</td>
                     <td><input type="password" name="pass2" placeholder="비밀번호 입력 확인"/>
-                    <button type="button" style="padding:6px; background:#2e658a; color:#fff;">비밀번호 수정</button></td>
+                    <button type="button" class="btnUpdatePw" style="padding:6px; background:#2e658a; color:#fff;">비밀번호 수정</button></td>
                 </tr>
                 <tr>
                 	<td>회원가입일</td>

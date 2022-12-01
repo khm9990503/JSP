@@ -303,7 +303,7 @@ public class ArticleDAO extends DBHelper{
 	public List<ArticleVO> selectLatestS() {
 		List<ArticleVO> latests = new ArrayList<>();
 		try {
-			logger.debug("selectLatest...");
+			logger.info("selectLatestS start...");
 			
 			conn = getConnection();
 			stmt = conn.createStatement();
@@ -316,20 +316,18 @@ public class ArticleDAO extends DBHelper{
 				ab.setRdate(rs.getString(3).substring(2,10));
 				latests.add(ab);
 			}
-			rs.close();
-			stmt.close();
-			conn.close();
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("selectLatest size : "+latests.size());
+		logger.debug("selectLatestS size : "+latests.size());
 		return latests;
 	}
 	
 	public List<ArticleVO> selectLatestN(String cate) {
 		List<ArticleVO> latests = new ArrayList<>();
 		try {
-			logger.debug("selectLatest...");
+			logger.info("selectLatestN start...");
 			
 			conn = getConnection();
 			psmt = conn.prepareStatement(Sql.SELECT_LATEST_NOTICE);
@@ -343,13 +341,11 @@ public class ArticleDAO extends DBHelper{
 				
 				latests.add(ab);
 			}
-			rs.close();
-			psmt.close();
-			conn.close();
+			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("selectLatest size : "+latests.size());
+		logger.debug("selectLatestN size : "+latests.size());
 		return latests;
 	}
 	// 조회수 업데이트
