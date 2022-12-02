@@ -49,9 +49,14 @@
 	            	<input type="hidden" name="grade" value="${sessUser.grade}">
 	            	<input type="hidden" name="group" value="${group}">
 	            	<input type="hidden" name="cate" value="${cate}">
+	            	<select>
+	            		<option value="nick">글쓴이</option>
+	            		<option value="title">제목</option>
+	            		<option value="content">내용</option>
+	            	</select>
 		            <input type="text" name="search" placeholder="제목 키워드, 글쓴이 검색">
 		            <input type="submit" value="검색">
-	       		 </form>
+	       		</form>
                 <table border="0">
                 	<caption>글목록</caption>
                     <tr>

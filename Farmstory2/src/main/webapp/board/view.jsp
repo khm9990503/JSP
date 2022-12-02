@@ -22,7 +22,7 @@ $(document).ready(function() {
 			};
 			
 			$.ajax({
-				url:'/JBoard2/commentDelete.do',
+				url:'/Farmstory2/board/commentDelete.do',
 				type:'GET',
 				data:jsonData,
 				dataType:'json',
@@ -63,7 +63,7 @@ $(document).ready(function() {
 			};
 			
 			$.ajax({
-				url:'/JBoard2/commentModify.do',
+				url:'/Farmstory2/board/commentModify.do',
 				type:'POST',
 				data:jsonData,
 				dataType:'json',
@@ -99,7 +99,7 @@ $(document).ready(function() {
 		console.log(jsonData);
 		
 		$.ajax({
-			url:'/JBoard2/commentWrite.do',
+			url:'/Farmstory2/board/commentWrite.do',
 			method:'post',
 			data:jsonData,
 			dataType:'json',

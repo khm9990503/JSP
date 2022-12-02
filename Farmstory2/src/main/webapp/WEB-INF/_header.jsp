@@ -40,6 +40,7 @@
             <p>
             	<a href="/Farmstory2/">HOME |</a>
 	            <span class="nick">${sessUser.nick}</span>님 반갑습니다.
+	            <a href="/Farmstory2/user/info.do">[회원정보]</a>
 	            <a href="/Farmstory2/user/logout.do" class="logout">[로그아웃]</a>
             </p>
             </c:otherwise>

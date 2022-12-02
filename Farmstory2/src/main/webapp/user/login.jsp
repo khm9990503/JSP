@@ -10,6 +10,10 @@
 			alert('먼저 로그인을 하셔야 합니다.');
 		}else if(success == "201"){
 			alert('정상적으로 로그아웃이 되었습니다.');
+		}else if(success == "401"){
+			alert('회원정보가 수정되었습니다.\n다시 로그인 해주세요.');
+		}else if(success == "501"){
+			alert('회원 탈퇴되었습니다.');
 		}
 	});
 </script>

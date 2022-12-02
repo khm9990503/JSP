@@ -1,19 +1,21 @@
 package kr.co.Farmstory2.controller.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import kr.co.Farmstory2.dao.UserDAO;
 
 
-@WebServlet("/user/logout.do")
-public class LogoutController extends HttpServlet{
+@WebServlet("/user/dropUser.do")
+public class DropUserController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -26,25 +28,15 @@ public class LogoutController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String success = "201";
-		if(req.getParameter("success") != null) {
-			success = req.getParameter("success");
-		}
 		String uid = req.getParameter("uid");
-		// session 제거
-		req.getSession().removeAttribute("sessUser");
-		req.getSession().invalidate();
 		
-		// 로그아웃을 위한 쿠키 제거
-		Cookie cookie = new Cookie("SESSID", null);
-		cookie.setPath("/");
-		cookie.setMaxAge(0);
-		resp.addCookie(cookie);
+		int result = UserDAO.getInstance().dropUser(uid);
 		
-		// 데이터베이스 세션 로그아웃
-		UserDAO.getInstance().updateUserSessionOut(uid);
-		
-		resp.sendRedirect("/Farmstory2/user/login.do?success="+success);
+		// 출력
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		PrintWriter out = resp.getWriter();
+		out.print(json.toString());
 	}
 	
 	@Override

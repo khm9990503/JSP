@@ -1,19 +1,23 @@
 package kr.co.Farmstory2.controller.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import kr.co.Farmstory2.dao.UserDAO;
+import kr.co.Farmstory2.vo.UserVO;
 
 
-@WebServlet("/user/logout.do")
-public class LogoutController extends HttpServlet{
+@WebServlet("/user/info.do")
+public class InfoController extends HttpServlet{
 	/**
 	 * 
 	 */
@@ -26,29 +30,26 @@ public class LogoutController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String success = "201";
-		if(req.getParameter("success") != null) {
-			success = req.getParameter("success");
-		}
-		String uid = req.getParameter("uid");
-		// session 제거
-		req.getSession().removeAttribute("sessUser");
-		req.getSession().invalidate();
 		
-		// 로그아웃을 위한 쿠키 제거
-		Cookie cookie = new Cookie("SESSID", null);
-		cookie.setPath("/");
-		cookie.setMaxAge(0);
-		resp.addCookie(cookie);
-		
-		// 데이터베이스 세션 로그아웃
-		UserDAO.getInstance().updateUserSessionOut(uid);
-		
-		resp.sendRedirect("/Farmstory2/user/login.do?success="+success);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/info.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 수신
+		String pass = req.getParameter("pass");
+		String uid = req.getParameter("uid");
 		
+		UserVO vo = UserDAO.getInstance().selectUser(uid, pass);
+		int result = 0;
+		// 출력
+		JsonObject jsonData = new JsonObject();
+		if(vo!=null) {
+			result = 1;
+		}
+		jsonData.addProperty("result", result);
+		PrintWriter out = resp.getWriter();
+		out.print(jsonData.toString());
 	}
 }
