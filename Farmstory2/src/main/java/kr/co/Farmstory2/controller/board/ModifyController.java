@@ -52,12 +52,15 @@ public class ModifyController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pg = req.getParameter("pg");
 		String no = req.getParameter("no");
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
+		
 		String title = req.getParameter("title");
 		String content = req.getParameter("ir1");
 		
 		ArticleDAO dao = ArticleDAO.getInstance();
 		int result = dao.updateArticle(title, content, no);
 		
-		resp.sendRedirect("/Farmstory2/board/view.do?no="+no+"&pg="+pg);
+		resp.sendRedirect("/Farmstory2/board/view.do?no="+no+"&pg="+pg+"&group="+group+"&cate="+cate);
 	}
 }

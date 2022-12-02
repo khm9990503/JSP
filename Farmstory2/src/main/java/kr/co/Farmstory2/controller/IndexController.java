@@ -1,7 +1,6 @@
 package kr.co.Farmstory2.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 
 import kr.co.Farmstory2.dao.ArticleDAO;
 import kr.co.Farmstory2.vo.ArticleVO;
@@ -31,7 +29,6 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 수신
-		String cate =  req.getParameter("cate");
 		
 		ArticleDAO ad = ArticleDAO.getInstance();
 		List<ArticleVO> latests = ad.selectLatestS();

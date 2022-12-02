@@ -1,7 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String cate = request.getParameter("cate");
-%>
 <div id="sub">
     <div>
         <img src="/Farmstory2/img/sub_top_tit4.png" alt="intro">

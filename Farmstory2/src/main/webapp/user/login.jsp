@@ -10,8 +10,6 @@
 			alert('먼저 로그인을 하셔야 합니다.');
 		}else if(success == "201"){
 			alert('정상적으로 로그아웃이 되었습니다.');
-		}else if(success == "301"){
-			alert('정상적으로 비밀번호가 변경되었습니다.');
 		}
 	});
 </script>

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Farmstory2.dao.ArticleDAO;
 import kr.co.Farmstory2.service.ArticleService;
 import kr.co.Farmstory2.vo.ArticleVO;
 
@@ -27,6 +26,7 @@ public class ListController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// group cate 연결 작업
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
@@ -36,10 +36,8 @@ public class ListController extends HttpServlet{
 		String search = req.getParameter("search");
 		
 		int start = 0;
-		int total = 0;
 		int currentPage = 1;
 		int currentPageGroup = 1;
-		int pageStartNum = 0;
 		
 		if(pg!=null){
 			currentPage = Integer.parseInt(pg);
@@ -47,14 +45,8 @@ public class ListController extends HttpServlet{
 		
 		start = (currentPage - 1) * 10;
 		
-		ArticleDAO dao = ArticleDAO.getInstance();
-		
 		//전체 게시물 갯수
-		if(search == null) {
-			total = dao.selectCountTotal(cate);
-		}else {
-			total = dao.selectCountTotalBySearch(search, cate);
-		}
+		int total = service.getTotal(search, cate);
 		
 		//마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -62,14 +54,17 @@ public class ListController extends HttpServlet{
 		// 페이지 그룹 start, end 번호
 		int[] result = service.getPageGroupNum(currentPageGroup, lastPageNum);
 		
-		pageStartNum = total - start;
+		// 페이지 시작 넘버
+		int pageStartNum = service.getPageStartNum(total, start);
 		
+		// 게시물들 가져오기
 		List<ArticleVO> articles = null;
 		if(search == null) {
-			articles = dao.selectArticles(cate,start);
+			articles = service.selectArticles(cate,start);
 		}else {
 			articles = service.selectArticlesByKeyword(cate ,search, start);
 		}
+		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		req.setAttribute("pg", pg);

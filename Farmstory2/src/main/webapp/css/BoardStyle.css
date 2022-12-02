@@ -443,7 +443,7 @@
 .btnWrite {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -10;
     border: 1px solid #3b3c3f; 
     background: #4b545e; 
     color: #fff;

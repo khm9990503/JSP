@@ -31,7 +31,9 @@ public enum ArticleService {
 	public ArticleVO selectArticle(String no) {
 		return dao.selectArticle(no);
 	}
-	public void selectArticles() {}
+	public List<ArticleVO> selectArticles(String cate, int start) {
+		return dao.selectArticles(cate, start);
+	}
 	public List<ArticleVO> selectArticlesByKeyword(String cate, String keyword, int start) {
 		return dao.selectArticlesByKeyword(cate, keyword, start);
 	}
@@ -39,6 +41,23 @@ public enum ArticleService {
 	public void updateArticle() {}
 	public void deleteArticle() {}
 	
+	
+	//전체 게시물 갯수
+	public int getTotal(String search, String cate) {
+		int total = 0;
+		if(search == null) {
+			total = dao.selectCountTotal(cate);
+		}else {
+			total = dao.selectCountTotalBySearch(search, cate);
+		}
+		return total;
+	}
+	// 시작 페이지 번호
+	public int getPageStartNum(int total, int start) {
+		int pageStartNum = total - start;
+		return pageStartNum;
+	}
+	// 마지막 페이지 번호
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;
 		if(total % 10 == 0){
@@ -48,7 +67,7 @@ public enum ArticleService {
 		}
 		return lastPageNum;
 	}
-	
+	// 페이지 그룹 start, end 번호
 	public int[] getPageGroupNum(int currentPage, int lastPageNum) {
 		int currentPageGroup = (int)Math.ceil(currentPage / 10.0);
 		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
@@ -75,19 +94,19 @@ public enum ArticleService {
 	
 	public String renameFile(ArticleVO vo, String savePath) {
 		
-		// 파일명 수정
-		int idx = vo.getFname().lastIndexOf(".");
-		String ext = vo.getFname().substring(idx);//확장자
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss_");
-		String now = sdf.format(new Date());
-		String newName = now + vo.getUid() + ext; // 202210261113_a108.txt
-		
-		File oriFile = new File(savePath+"/"+vo.getFname());
-		File newFile = new File(savePath+"/"+newName);
-		
-		oriFile.renameTo(newFile);
-		
-		return newName;
+	// 파일명 수정
+	int idx = vo.getFname().lastIndexOf(".");
+	String ext = vo.getFname().substring(idx);//확장자
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss_");
+	String now = sdf.format(new Date());
+	String newName = now + vo.getUid() + ext; // 202210261113_a108.txt
+	
+	File oriFile = new File(savePath+"/"+vo.getFname());
+	File newFile = new File(savePath+"/"+newName);
+	
+	oriFile.renameTo(newFile);
+	
+	return newName;
 	}
 }

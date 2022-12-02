@@ -1,6 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/_header.jsp"/>
+<c:if test="${sessUser==null}">
+<script type="text/javascript">
+$(function() {
+	$(".arti").click(function(){
+    	if(!confirm("로그인 하셔야 열람 가능합니다.\n회원이 아니시라면 회원가입 하시겠습니까?")){
+    		return false;
+    	}else{
+    		location.href = "/Farmstory2/user/terms.do";
+    		return false;
+    	}
+    });
+});
+</script>
+</c:if>
    <main>
        <div class="slider">
            <div class="slider2">
@@ -34,7 +48,7 @@
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory2/board/view.do?group=story&cate=story2&pg=1&no=${i.no }">${i.title }</a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story2&pg=1&no=${i.no }" class="arti">${i.title }</a>
                        </td>
                        <td>${i.rdate }</td>
                    </tr>
@@ -51,7 +65,7 @@
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory2/board/view.do?group=story&cate=story3&pg=1&no=${i.no }">${i.title }</a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story3&pg=1&no=${i.no }" class="arti">${i.title }</a>
                        </td>
                        <td>${i.rdate }</td>
                    </tr>
@@ -68,7 +82,7 @@
                    <tr>
                        <td>></td>
                        <td>
-                           <a href="/Farmstory2/board/view.do?group=story&cate=story&pg=1&no=${i.no }">${i.title }</a>
+                           <a href="/Farmstory2/board/view.do?group=story&cate=story&pg=1&no=${i.no }" class="arti">${i.title }</a>
                        </td>
                        <td>${i.rdate }</td>
                    </tr>
@@ -89,10 +103,10 @@
                    </p>
                </div>
                <div class="btns">
-                   <a href="/Farmstory2/board/list.do?group=community&cate=one">
+                   <a href="/Farmstory2/board/list.do?group=community&cate=one" class="arti">
                        <img src="./img/main_sub2_cs_bt1.png" alt="1:1">
                    </a>
-                   <a href="/Farmstory2/board/list.do?group=community&cate=question">
+                   <a href="/Farmstory2/board/list.do?group=community&cate=question" class="arti">
                        <img src="./img/main_sub2_cs_bt2.png" alt="자주">
                    </a>
                    <a href="#">
@@ -120,21 +134,21 @@
                    <div id="tabs-1">
 	                   <ul class="txt">
 	                   	<c:forEach var="i" items="${latestN}">
-	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=notice&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=notice&pg=1&no=${i.no}" class="arti">* ${i.title}</a></li>
 	                   	</c:forEach>
 	                   </ul>
                    </div>
                    <div id="tabs-2">
                      	<ul class="txt">
 	                   	<c:forEach var="i" items="${latestO}">
-	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=one&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=one&pg=1&no=${i.no}" class="arti">* ${i.title}</a></li>
 	                   	</c:forEach>
 	                   </ul>
                    </div>
                    <div id="tabs-3">
                      	<ul class="txt">
 	                   	<c:forEach var="i" items="${latestQ}">
-	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=question&pg=1&no=${i.no}">* ${i.title}</a></li>
+	                   	<li><a href="/Farmstory2/board/view.do?group=community&cate=question&pg=1&no=${i.no}" class="arti">* ${i.title}</a></li>
 	                   	</c:forEach>
 	                   </ul>
                    </div>
