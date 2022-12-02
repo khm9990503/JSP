@@ -53,8 +53,16 @@ public class Sql {
 												+ "where `parent`=0 and `cate`=? "
 												+ "order by `no` desc "
 												+ "limit ?,10";
-	public static final String SELECT_ARTICLES_BY_KEYWORD = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
-															+ "where `parent`=0 AND (`nick` LIKE ? OR `title` LIKE ?) and `cate`=? "
+	public static final String SELECT_ARTICLES_BY_NICK = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
+															+ "where `parent`=0 AND (`nick` LIKE ? ) and `cate`=? "
+															+ "order by `no` DESC "
+															+ "LIMIT ?,10";
+	public static final String SELECT_ARTICLES_BY_TITLE = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
+															+ "where `parent`=0 AND (`title` LIKE ? ) and `cate`=? "
+															+ "order by `no` DESC "
+															+ "LIMIT ?,10";
+	public static final String SELECT_ARTICLES_BY_BOTH = "SELECT a.*, b.`nick` FROM `board_article` AS a JOIN `board_user` AS b ON a.uid = b.uid "
+															+ "where `parent`=0 AND (`nick` LIKE ? OR `title` LIKE ? ) and `cate`=? "
 															+ "order by `no` DESC "
 															+ "LIMIT ?,10";
 	public static final String SELECT_ARTICLE = "SELECT a.*, b.`fno`, b.`oriName`, b.`download` "
@@ -62,11 +70,8 @@ public class Sql {
 												+ "left JOIN `board_file` AS b "
 												+ "ON a.`no`=b.`parent` "
 												+ "WHERE `no`=?";
-	public static final String SELECT_LATEST_STORY = "(SELECT `no`,`title`,`rdate` FROM `board_article` WHERE `cate`='story2' ORDER BY `no` DESC LIMIT 5) "
-			+ "UNION "
-			+ "(SELECT `no`,`title`,`rdate` FROM `board_article` WHERE `cate`='story3' ORDER BY `no` DESC LIMIT 5) "
-			+ "UNION "
-			+ "(SELECT `no`,`title`,`rdate` FROM `board_article` WHERE `cate`='story' ORDER BY `no` DESC LIMIT 5);";
+	public static final String SELECT_LATEST_STORY = "SELECT `no`,`title`,`rdate` FROM `board_article` WHERE `cate`=? ORDER BY `no` DESC LIMIT 5";
+			
 	
 	public static final String SELECT_LATEST_NOTICE = "SELECT `no`,`title` FROM `board_article` WHERE `cate`=? ORDER BY `no` DESC LIMIT 3 ";
 			

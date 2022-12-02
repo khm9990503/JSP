@@ -14,6 +14,8 @@
 			alert('회원정보가 수정되었습니다.\n다시 로그인 해주세요.');
 		}else if(success == "501"){
 			alert('회원 탈퇴되었습니다.');
+		}else if(success == "601"){
+			alert('탈퇴회원입니다.\n로그인 할 수 없습니다.');
 		}
 	});
 </script>

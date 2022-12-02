@@ -173,16 +173,28 @@ public class ArticleDAO extends DBHelper{
 		}
 		return articles;
 	}
-	public List<ArticleVO> selectArticlesByKeyword(String cate, String search, int start) {
+	public List<ArticleVO> selectArticlesByKeyword(String cate,String type, String search, int start) {
 		List<ArticleVO> articles = new ArrayList<>();
 		try {
 			logger.info("selectArticlesByKeyword start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_KEYWORD);
-			psmt.setString(1, "%"+search+"%");
-			psmt.setString(2, "%"+search+"%");
-			psmt.setString(3, cate);
-			psmt.setInt(4, start);
+			if(type.equals("nick")) {
+				psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_NICK);
+			}else if(type.equals("title")) {
+				psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_TITLE);
+			}else if(type.equals("both")) {
+				psmt = conn.prepareStatement(Sql.SELECT_ARTICLES_BY_BOTH);
+			}
+			if(type.equals("nick") || type.equals("title")) {
+				psmt.setString(1, "%"+search+"%");
+				psmt.setString(2, cate);
+				psmt.setInt(3, start);
+			}else if(type.equals("both")) {
+				psmt.setString(1, "%"+search+"%");
+				psmt.setString(2, "%"+search+"%");
+				psmt.setString(3, cate);
+				psmt.setInt(4, start);
+			}
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				ArticleVO vo = new ArticleVO();
@@ -300,14 +312,15 @@ public class ArticleDAO extends DBHelper{
 		}
 		return total;
 	}
-	public List<ArticleVO> selectLatestS() {
+	public List<ArticleVO> selectLatestS(String cate) {
 		List<ArticleVO> latests = new ArrayList<>();
 		try {
 			logger.info("selectLatestS start...");
 			
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(Sql.SELECT_LATEST_STORY);
+			psmt = conn.prepareStatement(Sql.SELECT_LATEST_STORY);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
 				ArticleVO ab = new ArticleVO();

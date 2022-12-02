@@ -43,7 +43,7 @@ public class emailAuthController extends HttpServlet{
 		String password = "zobqiuynvkhwmidd";
 		
 		
-		String title = "JBoard2 code.";
+		String title = "Farmstory2 register code";
 		String content = "인증코드 6자리는 "+code+" 입니다.";
 		
 		// Gmail SMTP 정보 설정

@@ -28,12 +28,14 @@ public class ListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// group cate 연결 작업
+		
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
 		
 		// list 작업
 		String pg = req.getParameter("pg");
 		String search = req.getParameter("search");
+		String type = req.getParameter("search_type");
 		
 		int start = 0;
 		int currentPage = 1;
@@ -62,7 +64,7 @@ public class ListController extends HttpServlet{
 		if(search == null) {
 			articles = service.selectArticles(cate,start);
 		}else {
-			articles = service.selectArticlesByKeyword(cate ,search, start);
+			articles = service.selectArticlesByKeyword(cate , type, search, start);
 		}
 		
 		req.setAttribute("group", group);

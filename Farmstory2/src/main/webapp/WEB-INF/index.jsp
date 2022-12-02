@@ -30,10 +30,10 @@ $(function() {
            </div>
        </div>
        <div class="quick">
-           <a href="/Farmstory2/board/list.do?group=community&cate=today">
+           <a href="/Farmstory2/board/list.do?group=community&cate=today" class="arti">
                <img src="/Farmstory2/img/main_banner_sub1_tit.png" alt="오늘의 식단">
            </a>
-           <a href="/Farmstory2/board/list.do?group=community&cate=chef">
+           <a href="/Farmstory2/board/list.do?group=community&cate=chef" class="arti">
                <img src="/Farmstory2/img/main_banner_sub2_tit.png" alt="나도 요리사">
            </a>
        </div>
@@ -44,7 +44,7 @@ $(function() {
                </a>
                <img src="/Farmstory2/img/main_latest1_img.jpg" alt="img">
                <table>
-               <c:forEach var="i" items="${latests}" begin="0" end="4">
+               <c:forEach var="i" items="${latestS2}">
                    <tr>
                        <td>></td>
                        <td>
@@ -61,7 +61,7 @@ $(function() {
                </a>
                <img src="/Farmstory2/img/main_latest2_img.jpg" alt="img">
                <table>
-              <c:forEach var="i" items="${latests}" begin="5" end="9">
+              <c:forEach var="i" items="${latestS3}">
                    <tr>
                        <td>></td>
                        <td>
@@ -78,7 +78,7 @@ $(function() {
                </a>
                <img src="/Farmstory2/img/main_latest3_img.jpg" alt="img">
                <table>
-               <c:forEach var="i" items="${latests}" begin="10" end="14">
+               <c:forEach var="i" items="${latestS}">
                    <tr>
                        <td>></td>
                        <td>
@@ -92,10 +92,10 @@ $(function() {
        </div>
        <div class="info">
            <div>
-               <img src="./img/main_sub2_cs_tit.png" class="tit" alt="1">
+               <img src="/Farmstory2/img/main_sub2_cs_tit.png" class="tit" alt="1">
                <div class="tel">
-                   <img src="./img/main_sub2_cs_img.png" alt="2">
-                   <img src="./img/main_sub2_cs_txt.png" alt="3">
+                   <img src="/Farmstory2/img/main_sub2_cs_img.png" alt="2">
+                   <img src="/Farmstory2/img/main_sub2_cs_txt.png" alt="3">
                    <p class="time">
                        평일: AM 09:00 ~ PM 06:00<br>
                        점심: PM 12:00 ~ PM 01:00<br>
@@ -104,13 +104,13 @@ $(function() {
                </div>
                <div class="btns">
                    <a href="/Farmstory2/board/list.do?group=community&cate=one" class="arti">
-                       <img src="./img/main_sub2_cs_bt1.png" alt="1:1">
+                       <img src="/Farmstory2/img/main_sub2_cs_bt1.png" alt="1:1">
                    </a>
                    <a href="/Farmstory2/board/list.do?group=community&cate=question" class="arti">
-                       <img src="./img/main_sub2_cs_bt2.png" alt="자주">
+                       <img src="/Farmstory2/img/main_sub2_cs_bt2.png" alt="자주">
                    </a>
                    <a href="#">
-                       <img src="./img/main_sub2_cs_bt3.png" alt="배송">
+                       <img src="/Farmstory2/img/main_sub2_cs_bt3.png" alt="배송">
                    </a>
                </div>
            </div>

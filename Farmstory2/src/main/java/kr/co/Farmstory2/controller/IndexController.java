@@ -31,13 +31,17 @@ public class IndexController extends HttpServlet{
 		// 수신
 		
 		ArticleDAO ad = ArticleDAO.getInstance();
-		List<ArticleVO> latests = ad.selectLatestS();
+		List<ArticleVO> latestS = ad.selectLatestS("story");
+		List<ArticleVO> latestS2 = ad.selectLatestS("story2");
+		List<ArticleVO> latestS3 = ad.selectLatestS("story3");
 		List<ArticleVO> latestN = ad.selectLatestN("notice");
 		List<ArticleVO> latestO = ad.selectLatestN("one");
 		List<ArticleVO> latestQ = ad.selectLatestN("question");
 		
 		// 출력
-		req.setAttribute("latests", latests);
+		req.setAttribute("latestS", latestS);
+		req.setAttribute("latestS2", latestS2);
+		req.setAttribute("latestS3", latestS3);
 		req.setAttribute("latestN", latestN);
 		req.setAttribute("latestO", latestO);
 		req.setAttribute("latestQ", latestQ);

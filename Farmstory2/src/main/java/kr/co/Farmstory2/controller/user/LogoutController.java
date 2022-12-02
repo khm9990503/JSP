@@ -27,10 +27,13 @@ public class LogoutController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String success = "201";
+		// 회원정보 수정 시 로그아웃
 		if(req.getParameter("success") != null) {
 			success = req.getParameter("success");
 		}
+		
 		String uid = req.getParameter("uid");
+		
 		// session 제거
 		req.getSession().removeAttribute("sessUser");
 		req.getSession().invalidate();

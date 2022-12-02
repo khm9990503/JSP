@@ -49,10 +49,10 @@
 	            	<input type="hidden" name="grade" value="${sessUser.grade}">
 	            	<input type="hidden" name="group" value="${group}">
 	            	<input type="hidden" name="cate" value="${cate}">
-	            	<select>
+	            	<select name="search_type" style="height: 26px">
 	            		<option value="nick">글쓴이</option>
 	            		<option value="title">제목</option>
-	            		<option value="content">내용</option>
+	            		<option value="both">글쓴이+제목</option>
 	            	</select>
 		            <input type="text" name="search" placeholder="제목 키워드, 글쓴이 검색">
 		            <input type="submit" value="검색">

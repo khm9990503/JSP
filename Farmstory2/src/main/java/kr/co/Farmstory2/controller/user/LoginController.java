@@ -58,9 +58,13 @@ public class LoginController extends HttpServlet{
 		// 아이디 기억
 		String auto = req.getParameter("auto");
 		
-		
 		if(vo!=null) {
-			//회원 맞음
+			// 탈퇴 회원인 경우
+			if(vo.getGrade()<1) {
+				resp.sendRedirect("/Farmstory2/user/login.do?success=601");
+				return;
+			}
+			// 정상 회원 맞음
 			HttpSession session = req.getSession(); // 현재 클라이언트 세션을 구함
 			session.setAttribute("sessUser", vo);
 			
@@ -79,6 +83,7 @@ public class LoginController extends HttpServlet{
 			}
 			
 			resp.sendRedirect("/Farmstory2/index.do");
+			
 		}else {
 			//회원 아님
 			resp.sendRedirect("/Farmstory2/user/login.do?success=100");

@@ -61,7 +61,7 @@ $(function(){
                         </tr>
                     </table>
                     <div>
-                        <a href="/Farmstory2/board/view.do?pg=${pg }&no=${no}" class="btn btnCancel">취소</a>
+                        <a href="/Farmstory2/board/view.do?pg=${pg }&no=${no}&group=${group}&cate=${cate}" class="btn btnCancel">취소</a>
                         <input type="submit" class="btn btnComplete" value="수정완료">
                     </div>
                 </form>
