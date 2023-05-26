@@ -23,7 +23,7 @@
 
 	$(function () {
 		
-		// 아이디 우효성 검증 & 중복체크
+		// 아이디 유효성 검증 & 중복체크
 		$('input[name=uid]').keydown(function() {
 			isUidOk=false;
 		});
